@@ -1,0 +1,196 @@
+'use client'
+
+import { useRef, useState, type MouseEvent } from 'react'
+import { ExternalLink } from 'lucide-react'
+
+import { Badge } from '@/components/ui/badge'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
+import { cn } from '@/lib/utils'
+import { orcidTypeLabel, type OrcidWork } from '@/lib/orcid'
+
+const PAGE_SIZE = 10
+
+function WorkRow({ work }: { work: OrcidWork }) {
+  const href = work.url ?? (work.doi ? `https://doi.org/${work.doi}` : undefined)
+
+  const body = (
+    <>
+      {/* 年份栏：窄屏隐藏，移动端年份显示在底部 meta 中 */}
+      <div className="hidden w-14 shrink-0 justify-end pt-1 sm:flex" aria-hidden="true">
+        <span className="text-sm font-semibold tabular-nums text-muted-foreground/70">
+          {work.year ?? '—'}
+        </span>
+      </div>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        {/* 标题 + 外链指示 */}
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="min-w-0 text-base leading-snug font-medium text-pretty">
+            {work.title}
+          </h3>
+          {href && (
+            <ExternalLink
+              className="mt-1 size-4 shrink-0 text-muted-foreground/60 opacity-0 transition-opacity group-hover:opacity-100"
+              aria-hidden="true"
+            />
+          )}
+        </div>
+
+        {/* 出处（期刊/会议等），最多两行 */}
+        {work.journal && (
+          <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            {work.journal}
+          </p>
+        )}
+
+        {/* 类型 / 年份(移动端) / DOI */}
+        <div className="flex flex-wrap items-center gap-2.5 pt-1.5 text-xs text-muted-foreground">
+          <Badge variant="secondary">{orcidTypeLabel(work.type)}</Badge>
+          {work.year && <span className="tabular-nums sm:hidden">{work.year}</span>}
+          {work.doi && (
+            <Badge variant="outline" className="min-w-0 max-w-full font-mono">
+              <span className="truncate">DOI: {work.doi}</span>
+            </Badge>
+          )}
+        </div>
+      </div>
+    </>
+  )
+
+  const rowClassName =
+    'flex items-start gap-4 rounded-xl px-3 py-4 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/40'
+
+  if (href) {
+    return (
+      <li>
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className={`group ${rowClassName} hover:bg-muted/60`}
+        >
+          {body}
+        </a>
+      </li>
+    )
+  }
+
+  return <li className={rowClassName}>{body}</li>
+}
+
+/** 生成页码列表：当前页前后 2 页 + 首尾页，其余位置用省略号占位 */
+function getPageItems(current: number, total: number): (number | 'ellipsis')[] {
+  const wanted = new Set<number>([1, 2, total - 1, total])
+  for (let i = -2; i <= 2; i++) wanted.add(current + i)
+
+  const items: (number | 'ellipsis')[] = []
+  let previous = 0
+  for (let page = 1; page <= total; page++) {
+    if (!wanted.has(page)) continue
+    if (page - previous > 1) items.push('ellipsis')
+    items.push(page)
+    previous = page
+  }
+  return items
+}
+
+export default function PublicationsList({ works }: { works: OrcidWork[] }) {
+  const [page, setPage] = useState(1)
+  const topRef = useRef<HTMLDivElement>(null)
+
+  const pageCount = Math.max(1, Math.ceil(works.length / PAGE_SIZE))
+  const safePage = Math.min(page, pageCount)
+  const pageWorks = works.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
+  const pageItems = getPageItems(safePage, pageCount)
+
+  const goTo = (target: number) => {
+    const next = Math.min(Math.max(target, 1), pageCount)
+    setPage(next)
+    // 翻页后将列表顶部平滑带回视野（预留固定头部高度）
+    topRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+  }
+
+  // Pagination* 系列是 <a>，拦截默认跳转，改为本地切页
+  const handlePageClick = (target: number) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    goTo(target)
+  }
+
+  const disabledClasses = 'pointer-events-none opacity-50'
+
+  return (
+    <div ref={topRef} className="flex scroll-mt-36 flex-col">
+      <div className="flex items-center justify-between gap-2 px-1 pb-1 text-xs text-muted-foreground">
+        <span>
+          共 {works.length} 篇成果，每页 {PAGE_SIZE} 篇
+        </span>
+        {pageCount > 1 && (
+          <span className="tabular-nums">
+            第 {safePage} / {pageCount} 页
+          </span>
+        )}
+      </div>
+
+      <ol className="flex flex-col divide-y divide-border">
+        {pageWorks.map((work) => (
+          <WorkRow key={work.putCode} work={work} />
+        ))}
+      </ol>
+
+      {pageCount > 1 && (
+        <Pagination className="pt-4">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                text="上一页"
+                aria-label="上一页"
+                aria-disabled={safePage === 1}
+                className={cn(safePage === 1 && disabledClasses)}
+                onClick={handlePageClick(safePage - 1)}
+              />
+            </PaginationItem>
+
+            {pageItems.map((item, index) =>
+              item === 'ellipsis' ? (
+                <PaginationItem key={`ellipsis-${index}`}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              ) : (
+                <PaginationItem key={item}>
+                  <PaginationLink
+                    href="#"
+                    isActive={item === safePage}
+                    aria-label={`第 ${item} 页`}
+                    onClick={handlePageClick(item)}
+                  >
+                    {item}
+                  </PaginationLink>
+                </PaginationItem>
+              ),
+            )}
+
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                text="下一页"
+                aria-label="下一页"
+                aria-disabled={safePage === pageCount}
+                className={cn(safePage === pageCount && disabledClasses)}
+                onClick={handlePageClick(safePage + 1)}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
+    </div>
+  )
+}
