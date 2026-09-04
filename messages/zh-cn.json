@@ -4,7 +4,8 @@
     "Navigation": {
       "home": "主页",
       "news": "新闻",
-      "team": "团队"
+      "team": "团队",
+      "daily": "日常"
     }
   }
 }

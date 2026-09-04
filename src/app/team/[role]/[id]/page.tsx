@@ -1,7 +1,3 @@
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import {
   ArrowLeft,
   BadgeCheck,
@@ -12,6 +8,10 @@ import {
   Mail,
   type LucideIcon,
 } from 'lucide-react'
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
@@ -100,43 +100,39 @@ export default async function MemberPage({ params }: PageProps) {
           返回团队成员
         </Link>
 
-        <div className="mt-6 grid items-start gap-6 lg:grid-cols-[20rem_minmax(0,1fr)]">
+        <div className="mt-6 grid items-start gap-4 lg:grid-cols-[20rem_minmax(0,1fr)]">
           {/* 个人资料卡片 */}
           <aside className="lg:sticky lg:top-36">
             <Card className="overflow-hidden p-0">
               <div className="flex flex-col">
                 {/* 头像 + 基本信息：小屏左右横排，lg+ 改为上下通栏 */}
                 <div className="flex items-center gap-4 p-5 lg:block lg:p-0">
-                <Image
-                  src={member.avatarUrl}
-                  alt={`${member.name} 的头像`}
-                  width={640}
-                  height={640}
-                  sizes="(min-width: 1024px) 320px, 112px"
-                  priority
-                  className="size-24 shrink-0 rounded-xl object-cover lg:aspect-square lg:h-auto lg:w-full lg:rounded-none"
-                />
-                <div className="flex min-w-0 flex-1 flex-col gap-2.5 lg:w-full lg:gap-3 lg:px-6 lg:pt-6 lg:pb-6">
-                  <header className="flex flex-col gap-1">
-                    <h1 className="font-heading text-xl font-semibold tracking-tight text-pretty lg:text-2xl">
-                      {member.name}
-                    </h1>
-                    {member.nameEn && (
-                      <p className="truncate text-sm text-muted-foreground">
-                        {member.nameEn}
-                      </p>
-                    )}
-                  </header>
+                  <Image
+                    src={member.avatarUrl}
+                    alt={`${member.name} 的头像`}
+                    width={640}
+                    height={640}
+                    sizes="(min-width: 1024px) 320px, 112px"
+                    priority
+                    className="size-24 shrink-0 rounded-xl object-cover lg:aspect-square lg:h-auto lg:w-full lg:rounded-none"
+                  />
+                  <div className="flex min-w-0 flex-1 flex-col gap-2.5 lg:w-full lg:gap-3 lg:px-6 lg:pt-6 lg:pb-6">
+                    <header className="flex flex-col gap-1">
+                      <h1 className="font-heading text-xl font-semibold tracking-tight text-pretty lg:text-2xl">
+                        {member.name}
+                      </h1>
+                      {member.nameEn && (
+                        <p className="truncate text-sm text-muted-foreground">{member.nameEn}</p>
+                      )}
+                    </header>
 
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="secondary">{roleLabel[member.role]}</Badge>
-                    <Badge variant="secondary">@{member.grade}</Badge>
-                    {member.career && (
-                      <Badge variant="secondary">{member.career}</Badge>
-                    )}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge variant="secondary">{roleLabel[member.role]}</Badge>
+                      <Badge variant="secondary">@{member.grade}</Badge>
+                      {member.career && <Badge variant="secondary">{member.career}</Badge>}
+                    </div>
                   </div>
                 </div>
-              </div>
 
                 {links.length > 0 && (
                   <>
@@ -149,9 +145,7 @@ export default async function MemberPage({ params }: PageProps) {
                         <li key={href}>
                           <a
                             href={href}
-                            {...(isExternal(href)
-                              ? { target: '_blank', rel: 'noreferrer' }
-                              : {})}
+                            {...(isExternal(href) ? { target: '_blank', rel: 'noreferrer' } : {})}
                             className="group flex min-w-0 items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
                           >
                             <Icon className="size-4 shrink-0 text-muted-foreground" />
@@ -170,7 +164,7 @@ export default async function MemberPage({ params }: PageProps) {
           </aside>
 
           {/* 详细内容 */}
-          <div className="flex min-w-0 flex-col gap-6">
+          <div className="flex min-w-0 flex-col gap-4">
             <Card>
               <CardHeader>
                 <h2 className="font-heading text-xl font-semibold tracking-tight">研究方向</h2>

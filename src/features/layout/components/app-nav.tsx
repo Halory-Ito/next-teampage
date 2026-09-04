@@ -25,6 +25,10 @@ const navItems = [
     title: 'team',
     href: '/team',
   },
+  {
+    title: 'daily',
+    href: '/daily',
+  },
 ]
 
 export default function AppNav() {

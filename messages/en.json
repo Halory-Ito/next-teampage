@@ -4,7 +4,8 @@
     "Navigation": {
       "home": "Home",
       "news": "News",
-      "team": "Team"
+      "team": "Team",
+      "daily": "Daily"
     }
   }
 }
