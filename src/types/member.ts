@@ -5,6 +5,8 @@ export type Member = {
   role: 'teacher' | 'phd' | 'master' | 'undergrad'
   name: string
   nameEn: string
+  education?: Education[]
+  workHistory?: WorkHistory[]
   homepage?: string
   email?: string
   orcid?: string
@@ -13,4 +15,17 @@ export type Member = {
   research: string
   career?: string
   order?: number
+}
+
+export type Education = {
+  startDate: string
+  endDate?: string
+  school: string
+}
+
+export type WorkHistory = {
+  startDate: string
+  endDate: string
+  position: string
+  company: string
 }

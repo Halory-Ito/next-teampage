@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
 import { AlertCircle, BookOpen, ExternalLink } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { fetchOrcidWorks, ORCID_PROFILE_URL } from '@/lib/orcid'
+import { fetchOrcidWorks, ORCID_PROFILE_URL } from '@/features/team/lib/orcid'
 
 import PublicationsList from './publications-list'
 
@@ -29,7 +30,6 @@ function MemberPublicationsFallback() {
     <Card aria-busy="true">
       <CardHeader>
         <Skeleton className="h-7 w-28" />
-        <Skeleton className="h-4 w-44" />
       </CardHeader>
       <CardContent className="flex flex-col divide-y divide-border">
         {[0, 1, 2].map((i) => (
@@ -40,50 +40,88 @@ function MemberPublicationsFallback() {
   )
 }
 
+function PublicationsEmpty({
+  icon,
+  message,
+  orcid,
+  linkLabel,
+}: {
+  icon: 'book' | 'alert'
+  message: string
+  orcid: string
+  linkLabel?: string
+}) {
+  return (
+    <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-10 text-center">
+      {icon === 'book' ? (
+        <BookOpen className="size-8 text-muted-foreground" />
+      ) : (
+        <AlertCircle className="size-8 text-muted-foreground" />
+      )}
+      <p className="text-sm text-muted-foreground">{message}</p>
+      {linkLabel && orcid && (
+        <a
+          href={ORCID_PROFILE_URL(orcid)}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1 text-sm text-foreground underline-offset-4 hover:underline"
+        >
+          {linkLabel}
+          <ExternalLink className="size-3.5" />
+        </a>
+      )}
+    </div>
+  )
+}
+
 async function MemberPublicationsContent({ orcid }: { orcid: string }) {
+  const t = await getTranslations('Team.Member')
   const result = await fetchOrcidWorks(orcid)
 
   return (
     <Card>
       <CardHeader>
-        <h2 className="font-heading text-xl font-semibold tracking-tight">发表论文</h2>
-        <CardDescription>Publications · ORCID</CardDescription>
+        <h2 className="font-heading text-xl font-semibold tracking-tight">{t('paper')}</h2>
       </CardHeader>
       <CardContent>
         {result.ok && result.works.length > 0 ? (
           <PublicationsList works={result.works} />
         ) : (
-          <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-10 text-center">
-            {result.ok ? (
-              <BookOpen className="size-8 text-muted-foreground" />
-            ) : (
-              <AlertCircle className="size-8 text-muted-foreground" />
-            )}
-            <p className="text-sm text-muted-foreground">
-              {result.ok
-                ? '该成员暂未在 ORCID 登记公开论文成果。'
+          <PublicationsEmpty
+            icon={result.ok ? 'book' : 'alert'}
+            message={
+              result.ok
+                ? t('paperNoWorks')
                 : result.error === 'invalid'
-                  ? 'ORCID 编号格式不正确，暂时无法获取论文。'
-                  : '论文数据加载失败，请稍后重试。'}
-            </p>
-            <a
-              href={ORCID_PROFILE_URL(orcid)}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-foreground underline-offset-4 hover:underline"
-            >
-              前往 ORCID 查看完整成果
-              <ExternalLink className="size-3.5" />
-            </a>
-          </div>
+                  ? t('paperInvalid')
+                  : t('paperError')
+            }
+            orcid={orcid}
+            linkLabel={t('paperViewOrcid')}
+          />
         )}
       </CardContent>
     </Card>
   )
 }
 
-/** 论文列表：拉取 ORCID 期间先渲染骨架屏，数据就绪后流式替换 */
-export default function MemberPublications({ orcid }: { orcid: string }) {
+/** 论文列表：未提供 ORCID 时直接给出占位卡片；否则拉取期间先渲染骨架屏，数据就绪后流式替换 */
+export default async function MemberPublications({ orcid }: { orcid?: string }) {
+  const t = await getTranslations('Team.Member')
+
+  if (!orcid) {
+    return (
+      <Card>
+        <CardHeader>
+          <h2 className="font-heading text-xl font-semibold tracking-tight">{t('paper')}</h2>
+        </CardHeader>
+        <CardContent>
+          <PublicationsEmpty icon="book" message={t('paperNoOrcid')} orcid="" />
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Suspense fallback={<MemberPublicationsFallback />}>
       <MemberPublicationsContent orcid={orcid} />

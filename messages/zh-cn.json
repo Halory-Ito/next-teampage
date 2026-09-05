@@ -8,5 +8,118 @@
       "team": "团队",
       "daily": "日常"
     }
+  },
+  "Home": {
+    "Intro": {
+      "badge": "基本介绍",
+      "title": "大数据智能与遥感图像处理课题组",
+      "paragraphs": {
+        "p1": "课题组由{name}{career}领衔，依托重庆邮电大学计算机科学与技术学院，围绕大数据智能与遥感图像智能处理方向开展研究，成果发表于 IEEE TGRS、Information Fusion、Remote Sensing 等期刊，并承担多项国家级、省部级基金与企业横向课题。",
+        "p2": "我们坚持“科研 + 工程”双线并行的培养模式：既鼓励学生冲击高水平论文与竞赛奖项，也提供真实的大数据平台与算法项目作为练手场，帮助每位成员在毕业时拥有完整的作品集与可迁移的能力。"
+      },
+      "highlights": [
+        "覆盖遥感图像处理与大数据智能的科研训练",
+        "期刊论文、专利与学科竞赛的全流程产出",
+        "从大数据平台搭建到算法落地的工程实战"
+      ],
+      "ctaTeam": "了解团队成员",
+      "ctaNews": "查看团队动态",
+      "leaderLabel": "课题组负责人"
+    },
+    "Stats": {
+      "eyebrow": "数据一览",
+      "title": "数据展示",
+      "description": "在籍师生规模与历年动态成果一览，全部由团队成员档案与新闻数据自动统计。",
+      "items": {
+        "students": {
+          "label": "学生数",
+          "unit": "人"
+        },
+        "teachers": {
+          "label": "教师数",
+          "unit": "人"
+        },
+        "furtherStudy": {
+          "label": "升学人数",
+          "unit": "人"
+        },
+        "bigTech": {
+          "label": "入职大厂人数",
+          "unit": "人"
+        },
+        "papers": {
+          "label": "论文数量",
+          "unit": "篇"
+        },
+        "reports": {
+          "label": "媒体报道次数",
+          "unit": "次"
+        },
+        "awards": {
+          "label": "获奖数",
+          "unit": "项"
+        },
+        "projects": {
+          "label": "研发项目数",
+          "unit": "项"
+        }
+      },
+      "dataSource": "数据来源于团队档案库 · 动态覆盖 {from}—{to}"
+    },
+    "Testimonials": {
+      "eyebrow": "成员之声",
+      "title": "学生评价",
+      "description": "听团队成员与毕业校友分享他们在课题组的成长经历（当前为示例内容）。",
+      "empty": "该板块暂无评价"
+    }
+  },
+  "Team": {
+    "Member": {
+      "backToTeam": "返回团队成员",
+      "contactLinks": "联系方式",
+      "avatarAlt": "{name} 的头像",
+      "homepage": "个人主页",
+      "ongoing": "至今",
+      "role": {
+        "teacher": "教师",
+        "phd": "博士生",
+        "master": "硕士生",
+        "undergrad": "本科生"
+      },
+      "research": "研究方向",
+      "researchEmpty": "暂无公开的研究方向介绍。",
+      "bio": "个人介绍",
+      "bioEmpty": "暂无公开的个人介绍。",
+      "edu": "教育经历",
+      "eduEmpty": "暂无公开的教育经历。",
+      "work": "工作经历",
+      "workEmpty": "暂无公开的工作经历。",
+      "paper": "发表论文",
+      "paperNoOrcid": "该成员暂未提供 ORCID 编号。",
+      "paperNoWorks": "该成员暂未在 ORCID 登记公开论文成果。",
+      "paperInvalid": "ORCID 编号格式不正确，暂时无法获取论文。",
+      "paperError": "论文数据加载失败，请稍后重试。",
+      "paperViewOrcid": "前往 ORCID 查看完整成果",
+      "paperSummary": "共 {total} 篇成果，每页 {pageSize} 篇",
+      "paperPage": "第 {current} / {total} 页",
+      "prevPage": "上一页",
+      "nextPage": "下一页",
+      "goToPage": "第 {page} 页",
+      "paperTypes": {
+        "journal-article": "期刊论文",
+        "conference-paper": "会议论文",
+        "book": "学术专著",
+        "book-chapter": "专著章节",
+        "edited-book": "编著",
+        "dissertation": "学位论文",
+        "thesis": "学位论文",
+        "preprint": "预印本",
+        "working-paper": "工作论文",
+        "report": "研究报告",
+        "dataset": "数据集",
+        "patent": "专利",
+        "software": "软件"
+      }
+    }
   }
 }

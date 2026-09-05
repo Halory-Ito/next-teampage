@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState, type MouseEvent } from 'react'
 import { ExternalLink } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useRef, useState, type MouseEvent } from 'react'
 
 import { Badge } from '@/components/ui/badge'
 import {
@@ -13,12 +14,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+import { type OrcidWork } from '@/features/team/lib/orcid'
 import { cn } from '@/lib/utils'
-import { orcidTypeLabel, type OrcidWork } from '@/lib/orcid'
 
 const PAGE_SIZE = 10
 
-function WorkRow({ work }: { work: OrcidWork }) {
+function WorkRow({ work, typeLabel }: { work: OrcidWork; typeLabel: string }) {
   const href = work.url ?? (work.doi ? `https://doi.org/${work.doi}` : undefined)
 
   const body = (
@@ -33,9 +34,7 @@ function WorkRow({ work }: { work: OrcidWork }) {
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         {/* 标题 + 外链指示 */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="min-w-0 text-base leading-snug font-medium text-pretty">
-            {work.title}
-          </h3>
+          <h3 className="min-w-0 text-base leading-snug font-medium text-pretty">{work.title}</h3>
           {href && (
             <ExternalLink
               className="mt-1 size-4 shrink-0 text-muted-foreground/60 opacity-0 transition-opacity group-hover:opacity-100"
@@ -53,7 +52,7 @@ function WorkRow({ work }: { work: OrcidWork }) {
 
         {/* 类型 / 年份(移动端) / DOI */}
         <div className="flex flex-wrap items-center gap-2.5 pt-1.5 text-xs text-muted-foreground">
-          <Badge variant="secondary">{orcidTypeLabel(work.type)}</Badge>
+          <Badge variant="secondary">{typeLabel}</Badge>
           {work.year && <span className="tabular-nums sm:hidden">{work.year}</span>}
           {work.doi && (
             <Badge variant="outline" className="min-w-0 max-w-full font-mono">
@@ -103,6 +102,7 @@ function getPageItems(current: number, total: number): (number | 'ellipsis')[] {
 }
 
 export default function PublicationsList({ works }: { works: OrcidWork[] }) {
+  const t = useTranslations('Team.Member')
   const [page, setPage] = useState(1)
   const topRef = useRef<HTMLDivElement>(null)
 
@@ -129,20 +129,25 @@ export default function PublicationsList({ works }: { works: OrcidWork[] }) {
   return (
     <div ref={topRef} className="flex scroll-mt-36 flex-col">
       <div className="flex items-center justify-between gap-2 px-1 pb-1 text-xs text-muted-foreground">
-        <span>
-          共 {works.length} 篇成果，每页 {PAGE_SIZE} 篇
-        </span>
+        <span>{t('paperSummary', { total: works.length, pageSize: PAGE_SIZE })}</span>
         {pageCount > 1 && (
           <span className="tabular-nums">
-            第 {safePage} / {pageCount} 页
+            {t('paperPage', { current: safePage, total: pageCount })}
           </span>
         )}
       </div>
 
       <ol className="flex flex-col divide-y divide-border">
-        {pageWorks.map((work) => (
-          <WorkRow key={work.putCode} work={work} />
-        ))}
+        {pageWorks.map((work) => {
+          const typeKey = `paperTypes.${work.type}`
+          return (
+            <WorkRow
+              key={work.putCode}
+              work={work}
+              typeLabel={t.has(typeKey) ? t(typeKey) : work.type}
+            />
+          )
+        })}
       </ol>
 
       {pageCount > 1 && (
@@ -151,8 +156,8 @@ export default function PublicationsList({ works }: { works: OrcidWork[] }) {
             <PaginationItem>
               <PaginationPrevious
                 href="#"
-                text="上一页"
-                aria-label="上一页"
+                text={t('prevPage')}
+                aria-label={t('prevPage')}
                 aria-disabled={safePage === 1}
                 className={cn(safePage === 1 && disabledClasses)}
                 onClick={handlePageClick(safePage - 1)}
@@ -169,7 +174,7 @@ export default function PublicationsList({ works }: { works: OrcidWork[] }) {
                   <PaginationLink
                     href="#"
                     isActive={item === safePage}
-                    aria-label={`第 ${item} 页`}
+                    aria-label={t('goToPage', { page: item })}
                     onClick={handlePageClick(item)}
                   >
                     {item}
@@ -181,8 +186,8 @@ export default function PublicationsList({ works }: { works: OrcidWork[] }) {
             <PaginationItem>
               <PaginationNext
                 href="#"
-                text="下一页"
-                aria-label="下一页"
+                text={t('nextPage')}
+                aria-label={t('nextPage')}
                 aria-disabled={safePage === pageCount}
                 className={cn(safePage === pageCount && disabledClasses)}
                 onClick={handlePageClick(safePage + 1)}

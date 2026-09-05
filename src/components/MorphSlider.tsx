@@ -1,71 +1,80 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import type { CSSProperties } from 'react';
-import { Renderer, Triangle, Program, Mesh, Texture } from 'ogl';
-import { gsap } from 'gsap';
+import { gsap } from 'gsap'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import { Renderer, Triangle, Program, Mesh, Texture } from 'ogl'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import type { CSSProperties } from 'react'
 
-export type MorphTransition = 'melt' | 'ripple' | 'shear' | 'swirl';
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+
+export type MorphTransition = 'melt' | 'ripple' | 'shear' | 'swirl'
 
 export interface MorphItem {
-  image: string;
-  caption?: string;
+  image: string
+  caption?: string
 }
 
 export interface MorphSliderProps {
-  items?: MorphItem[];
-  startIndex?: number;
-  transition?: MorphTransition;
-  duration?: number;
-  ease?: string;
-  intensity?: number;
-  scale?: number;
-  aberration?: number;
-  drift?: number;
-  autoplay?: boolean;
-  autoplayDelay?: number;
-  loop?: boolean;
-  radius?: number;
-  overlayColor?: string;
-  showCaptions?: boolean;
-  showControls?: boolean;
-  showIndicators?: boolean;
-  className?: string;
-  [key: string]: unknown;
+  items?: MorphItem[]
+  startIndex?: number
+  transition?: MorphTransition
+  duration?: number
+  ease?: string
+  intensity?: number
+  scale?: number
+  aberration?: number
+  drift?: number
+  autoplay?: boolean
+  autoplayDelay?: number
+  loop?: boolean
+  radius?: number
+  overlayColor?: string
+  showCaptions?: boolean
+  showControls?: boolean
+  showIndicators?: boolean
+  className?: string
+  [key: string]: unknown
 }
 
 interface EngineOptions {
-  transition: MorphTransition;
-  duration: number;
-  ease: string;
-  intensity: number;
-  scale: number;
-  aberration: number;
-  drift: number;
-  overlayColor: string;
-  loop: boolean;
+  transition: MorphTransition
+  duration: number
+  ease: string
+  intensity: number
+  scale: number
+  aberration: number
+  drift: number
+  overlayColor: string
+  loop: boolean
 }
 
-type GL = Renderer['gl'];
+type GL = Renderer['gl']
 
-const TRANSITIONS: Record<MorphTransition, number> = { melt: 0, ripple: 1, shear: 2, swirl: 3 };
+const TRANSITIONS: Record<MorphTransition, number> = { melt: 0, ripple: 1, shear: 2, swirl: 3 }
 
 const DEFAULT_ITEMS: MorphItem[] = [
   {
-    image: 'https://images.unsplash.com/photo-1782977389500-dd7adad33ebe?q=80&w=1600&auto=format&fit=crop',
-    caption: 'One'
+    image:
+      'https://images.unsplash.com/photo-1782977389500-dd7adad33ebe?q=80&w=1600&auto=format&fit=crop',
+    caption: 'One',
   },
   {
-    image: 'https://images.unsplash.com/photo-1781499455083-6ccc3beb20cd?q=80&w=1600&auto=format&fit=crop',
-    caption: 'Two'
+    image:
+      'https://images.unsplash.com/photo-1781499455083-6ccc3beb20cd?q=80&w=1600&auto=format&fit=crop',
+    caption: 'Two',
   },
   {
-    image: 'https://images.unsplash.com/photo-1776394254711-4a0d7345269a?q=80&w=1600&auto=format&fit=crop',
-    caption: 'Three'
+    image:
+      'https://images.unsplash.com/photo-1776394254711-4a0d7345269a?q=80&w=1600&auto=format&fit=crop',
+    caption: 'Three',
   },
   {
-    image: 'https://images.unsplash.com/photo-1781242629922-6f39cc3671cd?q=80&w=1600&auto=format&fit=crop',
-    caption: 'Four'
-  }
-];
+    image:
+      'https://images.unsplash.com/photo-1781242629922-6f39cc3671cd?q=80&w=1600&auto=format&fit=crop',
+    caption: 'Four',
+  },
+]
 
 const vertexShader = `
 attribute vec2 position;
@@ -75,7 +84,7 @@ void main() {
   vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
 }
-`;
+`
 
 const fragmentShader = `
 precision highp float;
@@ -228,95 +237,157 @@ void main() {
 
   gl_FragColor = vec4(col, 1.0);
 }
-`;
+`
 
-function makeFallbackTexture(gl: GL): Texture {
-  const size = 4;
-  const data = new Uint8Array(size * size * 4);
+type RGB = [number, number, number]
+
+const FALLBACK_BG: RGB = [0.05, 0.05, 0.06]
+
+function makeFallbackTexture(gl: GL, rgb: RGB = [0.094, 0.094, 0.11]): Texture {
+  const size = 4
+  const data = new Uint8Array(size * size * 4)
   for (let i = 0; i < size * size; i++) {
-    data[i * 4] = 24;
-    data[i * 4 + 1] = 24;
-    data[i * 4 + 2] = 28;
-    data[i * 4 + 3] = 255;
+    data[i * 4] = Math.round(rgb[0] * 255)
+    data[i * 4 + 1] = Math.round(rgb[1] * 255)
+    data[i * 4 + 2] = Math.round(rgb[2] * 255)
+    data[i * 4 + 3] = 255
   }
-  return new Texture(gl, { image: data, width: size, height: size, generateMipmaps: false });
+  return new Texture(gl, { image: data, width: size, height: size, generateMipmaps: false })
 }
 
-function hexToRgb(hex: string): [number, number, number] {
-  let h = (hex || '#000000').replace('#', '');
-  if (h.length === 3) {
-    h = h
-      .split('')
-      .map(c => c + c)
-      .join('');
+function clamp01(v: number): number {
+  return v < 0 ? 0 : v > 1 ? 1 : v
+}
+
+/** Parse a single CSS <number> / <percentage> into a 0..1 float. */
+function cssNum(s: string): number {
+  const v = parseFloat(s)
+  return Number.isFinite(v) ? (s.includes('%') ? v / 100 : v) : 0
+}
+
+/** Convert an oklch(l c h) triplet into sRGB in [0, 1]. */
+function oklchToRgb(l: number, c: number, h: number): RGB {
+  const hr = (h * Math.PI) / 180
+  const a = c * Math.cos(hr)
+  const b = c * Math.sin(hr)
+  const l_ = l + 0.3963377774 * a + 0.2158037573 * b
+  const m_ = l - 0.1055613458 * a - 0.0638541728 * b
+  const s_ = l - 0.0894841775 * a - 1.291485548 * b
+  const l3 = l_ * l_ * l_
+  const m3 = m_ * m_ * m_
+  const s3 = s_ * s_ * s_
+  return [
+    clamp01(4.0767416621 * l3 - 3.3077115913 * m3 + 0.2309699292 * s3),
+    clamp01(-1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3),
+    clamp01(-0.0041960863 * l3 - 0.7034186147 * m3 + 1.707614701 * s3),
+  ]
+}
+
+/** Best-effort conversion of a CSS color string (hex / rgb / oklch) to sRGB. */
+function cssColorToRgb(color: string, fallback: RGB): RGB {
+  const c = (color || '').trim()
+  if (!c) return fallback
+  const hex = c.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i)
+  if (hex) {
+    let h = hex[1]
+    if (h.length === 3) h = [...h].map((x) => x + x).join('')
+    const n = parseInt(h, 16)
+    return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]
   }
-  const n = parseInt(h, 16);
-  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+  const rgb = c.match(/^rgba?\(\s*([^)]+)\)$/i)
+  if (rgb) {
+    const p = rgb[1]
+      .split(/[\s,/]+/)
+      .filter(Boolean)
+      .map(cssNum)
+    return [clamp01(p[0]), clamp01(p[1]), clamp01(p[2])]
+  }
+  const okl = c.match(/^oklch\(\s*([^)]+)\)$/i)
+  if (okl) {
+    const m = okl[1].match(/(-?[\d.]+%?)\s+(-?[\d.]+%?)\s+(-?[\d.]+%?)(?:\s*\/\s*[^)]+)?/)
+    if (m) return oklchToRgb(cssNum(m[1]), cssNum(m[2]), cssNum(m[3]))
+  }
+  return fallback
+}
+
+/** Resolve a shadcn theme token (CSS custom property) into sRGB floats. */
+function themeColorToRgb(varName: string, fallback: RGB): RGB {
+  try {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(varName)
+    return cssColorToRgb(value, fallback)
+  } catch {
+    return fallback
+  }
 }
 
 interface EngineConfig {
-  items: MorphItem[];
-  startIndex: number;
-  reducedMotion: boolean;
-  getOptions: () => EngineOptions;
-  onIndexChange: (index: number) => void;
-  dprCap: number;
+  items: MorphItem[]
+  startIndex: number
+  reducedMotion: boolean
+  getOptions: () => EngineOptions
+  onIndexChange: (index: number) => void
+  dprCap: number
 }
 
 class MorphEngine {
-  private container: HTMLElement;
-  private items: MorphItem[];
-  private getOptions: () => EngineOptions;
-  private onIndexChange: (index: number) => void;
-  private reducedMotion: boolean;
+  private container: HTMLElement
+  private items: MorphItem[]
+  private getOptions: () => EngineOptions
+  private onIndexChange: (index: number) => void
+  private reducedMotion: boolean
 
-  private current: number;
-  private animating = false;
-  private dragging = false;
-  private dragDir = 0;
-  private shownIndex: number;
-  private tween: gsap.core.Tween | null = null;
+  private current: number
+  private animating = false
+  private dragging = false
+  private dragDir = 0
+  private shownIndex: number
+  private tween: gsap.core.Tween | null = null
 
-  private renderer: Renderer;
-  private gl: GL;
-  private canvas: HTMLCanvasElement;
-  private geometry: Triangle;
-  private program: Program;
-  private mesh: Mesh;
-  private textures: Texture[];
-  private sizes: [number, number][];
-  private resizeObserver: ResizeObserver;
-  private raf = 0;
-  private boundLoop: (t: number) => void;
-  private boundContextLost: (e: Event) => void;
+  private renderer: Renderer
+  private gl: GL
+  private canvas: HTMLCanvasElement
+  private geometry: Triangle
+  private program: Program
+  private mesh: Mesh
+  private textures: Texture[]
+  private sizes: [number, number][]
+  private pending = new Set<number>()
+  private themeBackground: RGB = FALLBACK_BG
+  private themeObserver: MutationObserver | null = null
+  private resizeObserver: ResizeObserver
+  private raf = 0
+  private boundLoop: (t: number) => void
+  private boundContextLost: (e: Event) => void
 
   constructor(container: HTMLElement, config: EngineConfig) {
-    this.container = container;
-    this.items = config.items;
-    this.getOptions = config.getOptions;
-    this.onIndexChange = config.onIndexChange;
-    this.reducedMotion = config.reducedMotion;
-    this.current = config.startIndex;
-    this.shownIndex = config.startIndex;
+    this.container = container
+    this.items = config.items
+    this.getOptions = config.getOptions
+    this.onIndexChange = config.onIndexChange
+    this.reducedMotion = config.reducedMotion
+    this.current = config.startIndex
+    this.shownIndex = config.startIndex
 
     this.renderer = new Renderer({
       alpha: false,
       antialias: true,
-      dpr: Math.min(window.devicePixelRatio || 1, config.dprCap)
-    });
-    this.gl = this.renderer.gl;
-    this.gl.clearColor(0.05, 0.05, 0.06, 1);
+      dpr: Math.min(window.devicePixelRatio || 1, config.dprCap),
+    })
+    this.gl = this.renderer.gl
+    this.themeBackground = themeColorToRgb('--background', FALLBACK_BG)
+    this.gl.clearColor(this.themeBackground[0], this.themeBackground[1], this.themeBackground[2], 1)
 
-    this.canvas = this.gl.canvas as HTMLCanvasElement;
-    this.canvas.className = 'block w-full h-full';
-    container.appendChild(this.canvas);
+    this.canvas = this.gl.canvas as HTMLCanvasElement
+    this.canvas.className = 'block w-full h-full'
+    container.appendChild(this.canvas)
 
-    this.geometry = new Triangle(this.gl);
+    this.geometry = new Triangle(this.gl)
 
-    this.textures = this.items.map(() => makeFallbackTexture(this.gl));
-    this.sizes = this.items.map(() => [1, 1] as [number, number]);
+    this.items.forEach((_, index) => this.pending.add(index))
+    this.textures = this.items.map(() => makeFallbackTexture(this.gl, this.themeBackground))
+    this.sizes = this.items.map(() => [1, 1] as [number, number])
 
-    const opts = this.getOptions();
+    const opts = this.getOptions()
     this.program = new Program(this.gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
@@ -336,96 +407,104 @@ class MorphEngine {
         uTime: { value: 0 },
         uReduce: { value: this.reducedMotion ? 1 : 0 },
         uPointer: { value: [0.5, 0.5] },
-        uOverlay: { value: hexToRgb(opts.overlayColor) }
-      }
-    });
+        uOverlay: { value: cssColorToRgb(opts.overlayColor, [0, 0, 0]) },
+      },
+    })
 
-    this.mesh = new Mesh(this.gl, { geometry: this.geometry, program: this.program });
+    this.mesh = new Mesh(this.gl, { geometry: this.geometry, program: this.program })
 
-    this.boundContextLost = this.onContextLost.bind(this);
-    this.canvas.addEventListener('webglcontextlost', this.boundContextLost, false);
+    this.boundContextLost = this.onContextLost.bind(this)
+    this.canvas.addEventListener('webglcontextlost', this.boundContextLost, false)
 
-    this.resizeObserver = new ResizeObserver(() => this.resize());
-    this.resizeObserver.observe(container);
-    this.resize();
+    this.resizeObserver = new ResizeObserver(() => this.resize())
+    this.resizeObserver.observe(container)
+    this.resize()
 
-    this.loadTextures();
+    // Keep the WebGL clear color / placeholder tiles in sync with the active theme.
+    this.themeObserver = new MutationObserver(() => this.applyTheme())
+    this.themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
 
-    this.boundLoop = this.loop.bind(this);
-    this.raf = requestAnimationFrame(this.boundLoop);
+    this.loadTextures()
+
+    this.boundLoop = this.loop.bind(this)
+    this.raf = requestAnimationFrame(this.boundLoop)
   }
 
   private loadTextures(): void {
     this.items.forEach((item, index) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = item.image;
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      img.src = item.image
       img.onload = () => {
-        const texture = new Texture(this.gl, { generateMipmaps: false });
-        texture.image = img;
-        this.textures[index] = texture;
-        this.sizes[index] = [img.naturalWidth || 1, img.naturalHeight || 1];
+        this.pending.delete(index)
+        const texture = new Texture(this.gl, { generateMipmaps: false })
+        texture.image = img
+        this.textures[index] = texture
+        this.sizes[index] = [img.naturalWidth || 1, img.naturalHeight || 1]
         if (index === this.current) {
-          this.program.uniforms.tCurrent.value = texture;
-          this.program.uniforms.uCurrentSize.value = this.sizes[index];
+          this.program.uniforms.tCurrent.value = texture
+          this.program.uniforms.uCurrentSize.value = this.sizes[index]
         }
-      };
-      img.onerror = () => {};
-    });
+      }
+      img.onerror = () => {}
+    })
   }
 
   private resize(): void {
-    const rect = this.container.getBoundingClientRect();
-    const w = Math.max(rect.width, 1);
-    const h = Math.max(rect.height, 1);
-    this.renderer.setSize(w, h);
-    this.program.uniforms.uResolution.value = [this.gl.canvas.width, this.gl.canvas.height];
+    const rect = this.container.getBoundingClientRect()
+    const w = Math.max(rect.width, 1)
+    const h = Math.max(rect.height, 1)
+    this.renderer.setSize(w, h)
+    this.program.uniforms.uResolution.value = [this.gl.canvas.width, this.gl.canvas.height]
   }
 
   private syncOptions(): void {
-    const opts = this.getOptions();
-    this.program.uniforms.uMode.value = TRANSITIONS[opts.transition] ?? 0;
-    this.program.uniforms.uIntensity.value = opts.intensity;
-    this.program.uniforms.uScale.value = opts.scale;
-    this.program.uniforms.uAberration.value = opts.aberration;
-    this.program.uniforms.uDrift.value = opts.drift;
-    this.program.uniforms.uOverlay.value = hexToRgb(opts.overlayColor);
+    const opts = this.getOptions()
+    this.program.uniforms.uMode.value = TRANSITIONS[opts.transition] ?? 0
+    this.program.uniforms.uIntensity.value = opts.intensity
+    this.program.uniforms.uScale.value = opts.scale
+    this.program.uniforms.uAberration.value = opts.aberration
+    this.program.uniforms.uDrift.value = opts.drift
+    this.program.uniforms.uOverlay.value = cssColorToRgb(opts.overlayColor, [0, 0, 0])
   }
 
   private loop(t: number): void {
-    this.program.uniforms.uTime.value = t * 0.001;
-    if (!this.dragging && !this.animating) this.syncOptions();
-    this.renderer.render({ scene: this.mesh });
-    this.raf = requestAnimationFrame(this.boundLoop);
+    this.program.uniforms.uTime.value = t * 0.001
+    if (!this.dragging && !this.animating) this.syncOptions()
+    this.renderer.render({ scene: this.mesh })
+    this.raf = requestAnimationFrame(this.boundLoop)
   }
 
   private wrap(i: number): number {
-    const n = this.items.length;
-    return ((i % n) + n) % n;
+    const n = this.items.length
+    return ((i % n) + n) % n
   }
 
   private prepareNext(dir: number): number {
-    const target = this.wrap(this.current + dir);
-    this.program.uniforms.tCurrent.value = this.textures[this.current];
-    this.program.uniforms.uCurrentSize.value = this.sizes[this.current];
-    this.program.uniforms.tNext.value = this.textures[target];
-    this.program.uniforms.uNextSize.value = this.sizes[target];
-    this.program.uniforms.uDir.value = dir;
-    return target;
+    const target = this.wrap(this.current + dir)
+    this.program.uniforms.tCurrent.value = this.textures[this.current]
+    this.program.uniforms.uCurrentSize.value = this.sizes[this.current]
+    this.program.uniforms.tNext.value = this.textures[target]
+    this.program.uniforms.uNextSize.value = this.sizes[target]
+    this.program.uniforms.uDir.value = dir
+    return target
   }
 
   goTo(dir: number): void {
-    if (this.animating || this.dragging || this.items.length < 2) return;
-    const opts = this.getOptions();
+    if (this.animating || this.dragging || this.items.length < 2) return
+    const opts = this.getOptions()
     if (!opts.loop) {
-      const raw = this.current + dir;
-      if (raw < 0 || raw > this.items.length - 1) return;
+      const raw = this.current + dir
+      if (raw < 0 || raw > this.items.length - 1) return
     }
-    this.syncOptions();
-    const target = this.prepareNext(dir);
-    this.animating = true;
-    this.announce(target);
-    const duration = this.reducedMotion ? Math.min(opts.duration, 0.4) : opts.duration;
+    this.syncOptions()
+    const target = this.prepareNext(dir)
+    this.animating = true
+    this.announce(target)
+    const duration = this.reducedMotion ? Math.min(opts.duration, 0.4) : opts.duration
     this.tween = gsap.fromTo(
       this.program.uniforms.uProgress,
       { value: 0 },
@@ -433,114 +512,131 @@ class MorphEngine {
         value: 1,
         duration,
         ease: opts.ease,
-        onComplete: () => this.commit(target)
-      }
-    );
+        onComplete: () => this.commit(target),
+      },
+    )
   }
 
   private announce(index: number): void {
-    if (index === this.shownIndex) return;
-    this.shownIndex = index;
-    this.onIndexChange(index);
+    if (index === this.shownIndex) return
+    this.shownIndex = index
+    this.onIndexChange(index)
   }
 
   private commit(target: number): void {
-    this.current = target;
-    this.program.uniforms.tCurrent.value = this.textures[target];
-    this.program.uniforms.uCurrentSize.value = this.sizes[target];
-    this.program.uniforms.uProgress.value = 0;
-    this.animating = false;
-    this.tween = null;
-    this.announce(target);
+    this.current = target
+    this.program.uniforms.tCurrent.value = this.textures[target]
+    this.program.uniforms.uCurrentSize.value = this.sizes[target]
+    this.program.uniforms.uProgress.value = 0
+    this.animating = false
+    this.tween = null
+    this.announce(target)
   }
 
   next(): void {
-    this.goTo(1);
+    this.goTo(1)
   }
 
   prev(): void {
-    this.goTo(-1);
+    this.goTo(-1)
   }
 
   setPointer(x: number, y: number): void {
-    this.program.uniforms.uPointer.value = [x, y];
+    this.program.uniforms.uPointer.value = [x, y]
   }
 
   beginDrag(): boolean {
-    if (this.animating || this.items.length < 2) return false;
-    this.dragging = true;
-    this.dragDir = 0;
-    this.syncOptions();
-    return true;
+    if (this.animating || this.items.length < 2) return false
+    this.dragging = true
+    this.dragDir = 0
+    this.syncOptions()
+    return true
   }
 
   drag(ndx: number): void {
-    if (!this.dragging) return;
-    const opts = this.getOptions();
-    const dir = ndx < 0 ? 1 : -1;
+    if (!this.dragging) return
+    const opts = this.getOptions()
+    const dir = ndx < 0 ? 1 : -1
     if (!opts.loop) {
-      const raw = this.current + dir;
+      const raw = this.current + dir
       if (raw < 0 || raw > this.items.length - 1) {
-        this.program.uniforms.uProgress.value = 0;
-        return;
+        this.program.uniforms.uProgress.value = 0
+        return
       }
     }
     if (dir !== this.dragDir) {
-      this.dragDir = dir;
-      this.prepareNext(dir);
+      this.dragDir = dir
+      this.prepareNext(dir)
     }
-    const progress = Math.min(Math.abs(ndx), 1);
-    this.program.uniforms.uProgress.value = progress;
-    this.announce(progress > 0.5 ? this.wrap(this.current + dir) : this.current);
+    const progress = Math.min(Math.abs(ndx), 1)
+    this.program.uniforms.uProgress.value = progress
+    this.announce(progress > 0.5 ? this.wrap(this.current + dir) : this.current)
   }
 
   endDrag(): void {
-    if (!this.dragging) return;
-    this.dragging = false;
-    const p = this.program.uniforms.uProgress.value as number;
-    if (this.dragDir === 0) return;
-    const target = this.wrap(this.current + this.dragDir);
-    const duration = this.reducedMotion ? 0.3 : 0.5;
-    this.animating = true;
+    if (!this.dragging) return
+    this.dragging = false
+    const p = this.program.uniforms.uProgress.value as number
+    if (this.dragDir === 0) return
+    const target = this.wrap(this.current + this.dragDir)
+    const duration = this.reducedMotion ? 0.3 : 0.5
+    this.animating = true
     if (p > 0.4) {
-      this.announce(target);
+      this.announce(target)
       this.tween = gsap.to(this.program.uniforms.uProgress, {
         value: 1,
         duration,
         ease: 'power2.out',
-        onComplete: () => this.commit(target)
-      });
+        onComplete: () => this.commit(target),
+      })
     } else {
-      this.announce(this.current);
+      this.announce(this.current)
       this.tween = gsap.to(this.program.uniforms.uProgress, {
         value: 0,
         duration,
         ease: 'power2.out',
         onComplete: () => {
-          this.animating = false;
-          this.tween = null;
-        }
-      });
+          this.animating = false
+          this.tween = null
+        },
+      })
     }
   }
 
   private onContextLost(e: Event): void {
-    e.preventDefault();
-    cancelAnimationFrame(this.raf);
+    e.preventDefault()
+    cancelAnimationFrame(this.raf)
+  }
+
+  private applyTheme(): void {
+    const next = themeColorToRgb('--background', this.themeBackground)
+    if (next.every((v, i) => Math.abs(v - this.themeBackground[i]) < 1 / 255)) return
+    this.themeBackground = next
+    this.gl.clearColor(next[0], next[1], next[2], 1)
+    if (this.pending.size === 0) return
+    const fallback = makeFallbackTexture(this.gl, next)
+    this.pending.forEach((index) => {
+      this.textures[index] = fallback
+    })
+    if (this.pending.has(this.current)) {
+      this.program.uniforms.tCurrent.value = fallback
+      this.program.uniforms.uCurrentSize.value = this.sizes[this.current]
+    }
   }
 
   destroy(): void {
-    cancelAnimationFrame(this.raf);
-    if (this.tween) this.tween.kill();
-    this.resizeObserver.disconnect();
-    this.canvas.removeEventListener('webglcontextlost', this.boundContextLost);
-    this.textures.forEach(tex => {
-      if (tex && tex.texture) this.gl.deleteTexture(tex.texture);
-    });
-    if (this.program && this.program.program) this.gl.deleteProgram(this.program.program);
-    const ext = this.gl.getExtension('WEBGL_lose_context');
-    if (ext) ext.loseContext();
-    if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
+    cancelAnimationFrame(this.raf)
+    if (this.tween) this.tween.kill()
+    this.themeObserver?.disconnect()
+    this.resizeObserver.disconnect()
+    this.canvas.removeEventListener('webglcontextlost', this.boundContextLost)
+    this.textures.forEach((tex) => {
+      if (tex && tex.texture) this.gl.deleteTexture(tex.texture)
+    })
+    if (this.program && this.program.program) this.gl.deleteProgram(this.program.program)
+    const ext = this.gl.getExtension('WEBGL_lose_context')
+    if (ext) ext.loseContext()
+    if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas)
   }
 }
 
@@ -565,10 +661,10 @@ export default function MorphSlider({
   className = '',
   ...props
 }: MorphSliderProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const engineRef = useRef<MorphEngine | null>(null);
-  const [index, setIndex] = useState(startIndex);
-  const [hovering, setHovering] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const engineRef = useRef<MorphEngine | null>(null)
+  const [index, setIndex] = useState(startIndex)
+  const [hovering, setHovering] = useState(false)
 
   const optsRef = useRef<EngineOptions>({
     transition,
@@ -579,13 +675,23 @@ export default function MorphSlider({
     aberration,
     drift,
     overlayColor,
-    loop
-  });
-  optsRef.current = { transition, duration, ease, intensity, scale, aberration, drift, overlayColor, loop };
+    loop,
+  })
+  optsRef.current = {
+    transition,
+    duration,
+    ease,
+    intensity,
+    scale,
+    aberration,
+    drift,
+    overlayColor,
+    loop,
+  }
 
   useEffect(() => {
-    if (!containerRef.current) return undefined;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!containerRef.current) return undefined
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const engine = new MorphEngine(containerRef.current, {
       items,
@@ -593,96 +699,96 @@ export default function MorphSlider({
       reducedMotion,
       dprCap: 2,
       getOptions: () => optsRef.current,
-      onIndexChange: setIndex
-    });
-    engineRef.current = engine;
-    setIndex(startIndex);
+      onIndexChange: setIndex,
+    })
+    engineRef.current = engine
+    setIndex(startIndex)
 
     return () => {
-      engine.destroy();
-      engineRef.current = null;
-    };
+      engine.destroy()
+      engineRef.current = null
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, startIndex]);
+  }, [items, startIndex])
 
-  const handleNext = useCallback(() => engineRef.current?.next(), []);
-  const handlePrev = useCallback(() => engineRef.current?.prev(), []);
-
-  useEffect(() => {
-    if (!autoplay || hovering) return undefined;
-    const id = window.setTimeout(() => engineRef.current?.next(), Math.max(autoplayDelay, 1) * 1000);
-    return () => window.clearTimeout(id);
-  }, [autoplay, autoplayDelay, hovering, index]);
+  const handleNext = useCallback(() => engineRef.current?.next(), [])
+  const handlePrev = useCallback(() => engineRef.current?.prev(), [])
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return undefined;
-    let startX = 0;
-    let width = 1;
-    let active = false;
+    if (!autoplay || hovering) return undefined
+    const id = window.setTimeout(() => engineRef.current?.next(), Math.max(autoplayDelay, 1) * 1000)
+    return () => window.clearTimeout(id)
+  }, [autoplay, autoplayDelay, hovering, index])
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return undefined
+    let startX = 0
+    let width = 1
+    let active = false
 
     const onDown = (e: PointerEvent) => {
-      const rect = el.getBoundingClientRect();
-      width = rect.width || 1;
-      startX = e.clientX;
-      const px = (e.clientX - rect.left) / rect.width;
-      const py = (e.clientY - rect.top) / rect.height;
-      engineRef.current?.setPointer(px, 1 - py);
-      active = engineRef.current?.beginDrag() ?? false;
+      const rect = el.getBoundingClientRect()
+      width = rect.width || 1
+      startX = e.clientX
+      const px = (e.clientX - rect.left) / rect.width
+      const py = (e.clientY - rect.top) / rect.height
+      engineRef.current?.setPointer(px, 1 - py)
+      active = engineRef.current?.beginDrag() ?? false
       if (active && el.setPointerCapture) {
         try {
-          el.setPointerCapture(e.pointerId);
+          el.setPointerCapture(e.pointerId)
         } catch {}
       }
-    };
+    }
     const onMove = (e: PointerEvent) => {
-      if (!active) return;
-      const ndx = (e.clientX - startX) / width;
-      engineRef.current?.drag(ndx);
-    };
+      if (!active) return
+      const ndx = (e.clientX - startX) / width
+      engineRef.current?.drag(ndx)
+    }
     const onUp = () => {
-      if (!active) return;
-      active = false;
-      engineRef.current?.endDrag();
-    };
+      if (!active) return
+      active = false
+      engineRef.current?.endDrag()
+    }
 
-    el.addEventListener('pointerdown', onDown);
-    el.addEventListener('pointermove', onMove);
-    el.addEventListener('pointerup', onUp);
-    el.addEventListener('pointercancel', onUp);
+    el.addEventListener('pointerdown', onDown)
+    el.addEventListener('pointermove', onMove)
+    el.addEventListener('pointerup', onUp)
+    el.addEventListener('pointercancel', onUp)
 
     return () => {
-      el.removeEventListener('pointerdown', onDown);
-      el.removeEventListener('pointermove', onMove);
-      el.removeEventListener('pointerup', onUp);
-      el.removeEventListener('pointercancel', onUp);
-    };
-  }, []);
+      el.removeEventListener('pointerdown', onDown)
+      el.removeEventListener('pointermove', onMove)
+      el.removeEventListener('pointerup', onUp)
+      el.removeEventListener('pointercancel', onUp)
+    }
+  }, [])
 
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        handleNext();
+        e.preventDefault()
+        handleNext()
       } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        handlePrev();
+        e.preventDefault()
+        handlePrev()
       }
     },
-    [handleNext, handlePrev]
-  );
+    [handleNext, handlePrev],
+  )
 
-  const hasCaptions = items.some(item => item.caption);
+  const hasCaptions = items.some((item) => item.caption)
 
   return (
     <div
-      className={`relative w-full h-full overflow-hidden select-none bg-[#0c0c0e] ${className}`.trim()}
+      className={cn('relative h-full w-full select-none overflow-hidden bg-background', className)}
       style={
         {
           borderRadius: `${radius}px`,
           '--ms-swap': `${(duration * 0.66).toFixed(3)}s`,
           '--ms-dot': `${(duration * 0.45).toFixed(3)}s`,
-          touchAction: 'pan-y'
+          touchAction: 'pan-y',
         } as CSSProperties
       }
       onMouseEnter={() => setHovering(true)}
@@ -691,7 +797,7 @@ export default function MorphSlider({
     >
       <div
         ref={containerRef}
-        className="absolute inset-0 cursor-grab active:cursor-grabbing outline-none focus-visible:shadow-[inset_0_0_0_2px_rgba(255,255,255,0.7)]"
+        className="absolute inset-0 cursor-grab outline-none active:cursor-grabbing focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring/80"
         role="group"
         aria-roledescription="carousel"
         aria-label="Image morph slider"
@@ -701,91 +807,82 @@ export default function MorphSlider({
 
       {showCaptions && hasCaptions && (
         <div
-          className="morph-slider-caption pointer-events-none absolute bottom-[22px] left-[22px] z-[2] grid max-w-[70%]"
+          className="morph-slider-caption pointer-events-none absolute bottom-5.5 left-5.5 z-2 grid max-w-[70%]"
           aria-live="polite"
         >
           {items.map((item, i) =>
             item.caption ? (
-              <span
+              <Badge
                 key={i}
                 aria-hidden={i === index ? undefined : true}
-                className={`morph-slider-caption-text pointer-events-none inline-block rounded-[10px] bg-[rgba(10,10,12,0.42)] px-[14px] py-[8px] text-[15px] font-semibold tracking-[0.01em] text-white backdrop-blur-[8px] [grid-area:1/1] [justify-self:start] [transition:opacity_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),transform_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),filter_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1)] ${
+                variant="outline"
+                className={`morph-slider-caption-text pointer-events-none h-auto w-fit max-w-full rounded-[10px] border-border/60 bg-background/55 px-[14px] py-[8px] text-[15px] font-semibold tracking-[0.01em] text-foreground whitespace-normal shadow-sm backdrop-blur-[8px] [grid-area:1/1] [justify-self:start] [transition:opacity_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),transform_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),filter_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1)] ${
                   i === index
-                    ? 'opacity-100 [transform:translateY(0)] [filter:blur(0)]'
-                    : 'opacity-0 [transform:translateY(12px)] [filter:blur(6px)]'
+                    ? 'opacity-100 transform:translateY(0) filter:blur(0)'
+                    : 'opacity-0 transform:translateY(12px) filter:blur(6px)'
                 }`}
               >
                 {item.caption}
-              </span>
-            ) : null
+              </Badge>
+            ) : null,
           )}
         </div>
       )}
 
       {showControls && (
         <div className="absolute top-1/2 left-0 right-0 z-[3] flex justify-between px-4 -translate-y-1/2 pointer-events-none">
-          <button
+          <Button
             type="button"
-            className="pointer-events-auto inline-flex items-center justify-center w-10 h-10 rounded-full text-white border border-white/20 bg-[rgba(12,12,14,0.4)] backdrop-blur-md cursor-pointer transition-transform duration-200 hover:scale-105 hover:bg-[rgba(24,24,28,0.6)] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+            variant="ghost"
+            size="icon"
+            className="pointer-events-auto bg-background/45 text-foreground hover:bg-background/75 dark:hover:bg-background/75"
             aria-label="Previous slide"
             onClick={handlePrev}
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path
-                d="M15 5l-7 7 7 7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
+            <ChevronLeftIcon />
+          </Button>
+          <Button
             type="button"
-            className="pointer-events-auto inline-flex items-center justify-center w-10 h-10 rounded-full text-white border border-white/20 bg-[rgba(12,12,14,0.4)] backdrop-blur-md cursor-pointer transition-transform duration-200 hover:scale-105 hover:bg-[rgba(24,24,28,0.6)] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+            variant="ghost"
+            size="icon"
+            className="pointer-events-auto bg-background/45 text-foreground hover:bg-background/75 dark:hover:bg-background/75"
             aria-label="Next slide"
             onClick={handleNext}
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path
-                d="M9 5l7 7-7 7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+            <ChevronRightIcon />
+          </Button>
         </div>
       )}
 
       {showIndicators && (
         <div
-          className="absolute left-0 right-0 bottom-[18px] z-[3] flex gap-2 justify-center items-center"
+          className="absolute inset-x-0 bottom-[18px] z-[3] flex items-center justify-center"
           role="tablist"
           aria-label="Slides"
         >
-          {items.map((item, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              aria-selected={i === index}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2 rounded-full cursor-pointer [transition:width_var(--ms-dot)_cubic-bezier(0.16,1,0.3,1),background-color_var(--ms-dot)_ease] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 ${
-                i === index ? 'w-[22px] bg-white/95' : 'w-2 bg-white/35'
-              }`}
-              onClick={() => {
-                const engine = engineRef.current;
-                if (!engine || i === index) return;
-                engine.goTo(i > index ? 1 : -1);
-              }}
-            />
-          ))}
+          <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-background/45 px-2 py-1.5 shadow-sm backdrop-blur-md">
+            {items.map((item, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2 cursor-pointer rounded-full outline-none [transition:width_var(--ms-dot)_cubic-bezier(0.16,1,0.3,1),background-color_var(--ms-dot)_ease] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
+                  i === index
+                    ? 'w-[22px] bg-foreground'
+                    : 'w-2 bg-foreground/35 hover:bg-foreground/60'
+                }`}
+                onClick={() => {
+                  const engine = engineRef.current
+                  if (!engine || i === index) return
+                  engine.goTo(i > index ? 1 : -1)
+                }}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>
-  );
+  )
 }

@@ -1,9 +1,11 @@
 'use client'
 
+import { X } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import MorphSlider from '@/components/MorphSlider'
+import { Button } from '@/components/ui/button'
 import type { DailyGallery } from '@/types/daily'
 
 type DailyGalleryGridProps = {
@@ -133,22 +135,16 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
                 {active.date} · {active.gallery.length} 张照片
               </p>
             </div>
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="icon"
               onClick={close}
               aria-label="关闭相册"
-              className="pointer-events-auto inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[rgba(12,12,14,0.45)] text-white backdrop-blur-md transition-transform duration-200 hover:scale-105 hover:bg-[rgba(24,24,28,0.65)] active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+              className="pointer-events-auto size-10 border-border/40 bg-background/45 text-foreground shadow-sm backdrop-blur-md hover:scale-105 hover:bg-background/75 active:scale-95 dark:hover:bg-background/75"
             >
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                <path
-                  d="M6 6l12 12M18 6L6 18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
+              <X aria-hidden="true" className="size-[18px]" />
+            </Button>
           </header>
         </div>
       )}

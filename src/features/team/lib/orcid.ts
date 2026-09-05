@@ -5,26 +5,14 @@
  * - 公开接口无需鉴权，返回该 ORCID 账号下可见的全部 work summary
  * - 通过 Next.js fetch 缓存 + revalidate 控制请求频率（默认每 24h 重新验证一次）
  * - 网络异常 / 限流等一律降级为可读的错误信息，不阻塞页面渲染
+ *
+ * 期刊 / 会议名称有两级来源：
+ *   1. ORCID work summary 的 journal-title 字段（结构为 { value }）
+ *   2. 若 ORCID 未登记出处（会议论文常见），按 DOI 去 Crossref 补全 container-title
  */
 
 const ORCID_API_BASE = 'https://pub.orcid.org/v3.0'
-
-/** 与站点语言无关的成果类型 -> 中文展示文案 */
-const ORCID_TYPE_LABELS: Record<string, string> = {
-  'journal-article': '期刊论文',
-  'conference-paper': '会议论文',
-  'book': '学术专著',
-  'book-chapter': '专著章节',
-  'edited-book': '编著',
-  'dissertation': '学位论文',
-  'thesis': '学位论文',
-  'preprint': '预印本',
-  'working-paper': '工作论文',
-  'report': '研究报告',
-  'dataset': '数据集',
-  'patent': '专利',
-  'software': '软件',
-}
+const CROSSREF_API_BASE = 'https://api.crossref.org/works'
 
 const ORCID_ID_PATTERN = /^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$/
 
@@ -47,10 +35,6 @@ export type OrcidWorksResult =
 
 export const ORCID_PROFILE_URL = (orcid: string) => `https://orcid.org/${orcid}`
 
-export function orcidTypeLabel(type: string): string {
-  return ORCID_TYPE_LABELS[type] ?? type
-}
-
 /* ---------- ORCID v3 响应的最小结构定义 ---------- */
 
 interface OrcidTextValue {
@@ -58,6 +42,15 @@ interface OrcidTextValue {
 }
 
 interface OrcidTitle {
+  title?: OrcidTextValue | null
+}
+
+/**
+ * work summary 中 journal-title 的两种实际结构：
+ * 多数来源为 { value }，少数历史来源为 { title: { value } }
+ */
+interface OrcidJournalTitle {
+  value?: string | null
   title?: OrcidTextValue | null
 }
 
@@ -76,7 +69,7 @@ interface OrcidExternalId {
 interface OrcidWorkSummary {
   'put-code'?: string
   title?: OrcidTitle | null
-  'journal-title'?: OrcidTitle | null
+  'journal-title'?: OrcidJournalTitle | null
   type?: string
   'publication-date'?: OrcidPublicationDate | null
   'external-ids'?: { 'external-id'?: OrcidExternalId[] } | null
@@ -87,21 +80,31 @@ interface OrcidWorksResponse {
   group?: Array<{ 'work-summary'?: OrcidWorkSummary[] }>
 }
 
+/* ---------- Crossref 响应的最小结构定义 ---------- */
+
+interface CrossrefMessage {
+  'container-title'?: string[]
+  event?: { name?: string | null }
+}
+
+interface CrossrefResponse {
+  message?: CrossrefMessage
+}
+
 /* ---------- 解析与归一化 ---------- */
 
 function textValue(v?: OrcidTextValue | null): string | undefined {
   return v?.value?.trim() || undefined
 }
 
-function titleTextValue(v?: OrcidTitle | null): string | undefined {
-  return v?.title?.value?.trim() || undefined
+/** journal-title 兼容两种结构取第一个非空值 */
+function journalTitleValue(v?: OrcidJournalTitle | null): string | undefined {
+  return textValue(v) ?? textValue(v?.title)
 }
 
 function findDoi(summary: OrcidWorkSummary): string | undefined {
   const ids = summary['external-ids']?.['external-id'] ?? []
-  return ids.find(
-    (id) => id['external-id-type']?.toLowerCase() === 'doi',
-  )?.['external-id-value']
+  return ids.find((id) => id['external-id-type']?.toLowerCase() === 'doi')?.['external-id-value']
 }
 
 /** 同一篇论文可能被多个来源重复登记（group 分组），挑选信息最完整的一条展示 */
@@ -124,16 +127,65 @@ function parseWorkSummary(summary: OrcidWorkSummary): OrcidWork | null {
     title,
     type: summary.type ?? 'other',
     year: yearRaw ? Number(yearRaw) : undefined,
-    journal: titleTextValue(summary['journal-title']),
+    journal: journalTitleValue(summary['journal-title']),
     doi: findDoi(summary),
     url: textValue(summary.url),
   }
+}
+
+/**
+ * 通过 Crossref 按 DOI 查询期刊 / 会议名称。
+ * 失败或记录缺失时返回 undefined（由调用方静默降级，不影响列表渲染）。
+ */
+async function fetchCrossrefContainerTitle(doi: string): Promise<string | undefined> {
+  try {
+    const res = await fetch(`${CROSSREF_API_BASE}/${encodeURIComponent(doi)}`, {
+      headers: { Accept: 'application/json' },
+      // Crossref 元数据几乎不变，缓存 30 天
+      next: { revalidate: 60 * 60 * 24 * 30 },
+    })
+    if (!res.ok) return undefined
+
+    const data = (await res.json()) as CrossrefResponse
+    const container = data.message?.['container-title']?.find((item) => item.trim())
+    if (container) return container.trim()
+
+    // 部分会议只登记在 event 字段
+    const eventName = data.message?.event?.name?.trim()
+    return eventName || undefined
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * 并行（受限并发）为缺少出处的作品补全期刊 / 会议名。
+ * 只会请求有 DOI 且 ORCID 未给出 journal-title 的作品。
+ */
+async function backfillMissingJournals(works: OrcidWork[]): Promise<void> {
+  const pending = works.filter((work) => !work.journal && work.doi)
+  if (pending.length === 0) return
+
+  const CONCURRENCY = 6
+  let cursor = 0
+
+  const worker = async () => {
+    while (cursor < pending.length) {
+      const work = pending[cursor]
+      cursor += 1
+      work.journal = await fetchCrossrefContainerTitle(work.doi!)
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(CONCURRENCY, pending.length) }, () => worker())
+  await Promise.all(workers)
 }
 
 /* ---------- 对外接口 ---------- */
 
 /**
  * 拉取某个 ORCID 下的公开论文成果（按年份倒序）。
+ * 论文出处优先取 ORCID journal-title，缺失时按 DOI 从 Crossref 补全。
  * 失败时返回可展示的错误码，由调用方决定如何降级展示。
  */
 export async function fetchOrcidWorks(orcid: string): Promise<OrcidWorksResult> {
@@ -167,6 +219,8 @@ export async function fetchOrcidWorks(orcid: string): Promise<OrcidWorksResult> 
       if (byYear !== 0) return byYear
       return Number(b.putCode) - Number(a.putCode)
     })
+
+    await backfillMissingJournals(works)
 
     return { ok: true, works }
   } catch {

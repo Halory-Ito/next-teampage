@@ -8,5 +8,118 @@
       "team": "Team",
       "daily": "Daily"
     }
+  },
+  "Home": {
+    "Intro": {
+      "badge": "About Us",
+      "title": "Big Data Intelligence & Remote Sensing Image Processing Group",
+      "paragraphs": {
+        "p1": "Led by {name} ({career}) at the School of Computer Science and Technology, Chongqing University of Posts and Telecommunications, our group works on big data intelligence and intelligent remote sensing image processing. Research results have been published in journals such as IEEE TGRS, Information Fusion and Remote Sensing, supported by national and provincial funds as well as industry collaborations.",
+        "p2": "We follow an integrated research-plus-engineering training model: members are encouraged to pursue high-quality papers, patents and competition awards, while also getting hands-on with real big-data platforms and algorithm projects — so everyone graduates with a solid portfolio and transferable skills."
+      },
+      "highlights": [
+        "Research training in remote sensing image processing and big data intelligence",
+        "End-to-end output of journal papers, patents and competitions",
+        "Engineering practice from data platform to algorithm deployment"
+      ],
+      "ctaTeam": "Meet the Team",
+      "ctaNews": "View Latest News",
+      "leaderLabel": "Group Leader"
+    },
+    "Stats": {
+      "eyebrow": "By The Numbers",
+      "title": "Key Figures",
+      "description": "Team size and achievements over the years, automatically compiled from team profiles and news archives.",
+      "items": {
+        "students": {
+          "label": "Students",
+          "unit": ""
+        },
+        "teachers": {
+          "label": "Faculty",
+          "unit": ""
+        },
+        "furtherStudy": {
+          "label": "Further Study",
+          "unit": ""
+        },
+        "bigTech": {
+          "label": "Big-Tech Careers",
+          "unit": ""
+        },
+        "papers": {
+          "label": "Publications",
+          "unit": ""
+        },
+        "reports": {
+          "label": "Media Coverage",
+          "unit": ""
+        },
+        "awards": {
+          "label": "Awards",
+          "unit": ""
+        },
+        "projects": {
+          "label": "R&D Projects",
+          "unit": ""
+        }
+      },
+      "dataSource": "Source: team archives · timeline {from}–{to}"
+    },
+    "Testimonials": {
+      "eyebrow": "From Our Students",
+      "title": "Student Testimonials",
+      "description": "Hear how current members and alumni grew with our group (sample content).",
+      "empty": "No testimonials yet."
+    }
+  },
+  "Team": {
+    "Member": {
+      "backToTeam": "Back to Team",
+      "contactLinks": "Contact links",
+      "avatarAlt": "Avatar of {name}",
+      "homepage": "Homepage",
+      "ongoing": "Present",
+      "role": {
+        "teacher": "Teacher",
+        "phd": "PhD",
+        "master": "Master",
+        "undergrad": "Undergraduate"
+      },
+      "research": "Research Areas",
+      "researchEmpty": "No public research areas are available.",
+      "bio": "Biography",
+      "bioEmpty": "No public biography is available.",
+      "edu": "Education",
+      "eduEmpty": "No public education is available.",
+      "work": "Work Experience",
+      "workEmpty": "No public work experience is available.",
+      "paper": "Publications",
+      "paperNoOrcid": "This member has not provided an ORCID iD yet.",
+      "paperNoWorks": "This member has no public works registered on ORCID.",
+      "paperInvalid": "The ORCID iD format is invalid, so publications are temporarily unavailable.",
+      "paperError": "Failed to load publications. Please try again later.",
+      "paperViewOrcid": "View full profile on ORCID",
+      "paperSummary": "{total} results · {pageSize} per page",
+      "paperPage": "Page {current} of {total}",
+      "prevPage": "Previous",
+      "nextPage": "Next",
+      "goToPage": "Go to page {page}",
+      "paperTypes": {
+        "journal-article": "Journal Article",
+        "conference-paper": "Conference Paper",
+        "book": "Book",
+        "book-chapter": "Book Chapter",
+        "edited-book": "Edited Book",
+        "dissertation": "Dissertation",
+        "thesis": "Thesis",
+        "preprint": "Preprint",
+        "working-paper": "Working Paper",
+        "report": "Report",
+        "dataset": "Dataset",
+        "patent": "Patent",
+        "software": "Software"
+      }
+    }
   }
 }

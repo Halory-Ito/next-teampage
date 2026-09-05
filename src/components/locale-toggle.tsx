@@ -26,7 +26,7 @@ const items = [
 ]
 
 export default function LocaleToggle({ defaultValue = defaultLocale }) {
-  const [isPending, startTransition] = useTransition()
+  const [_isPending, startTransition] = useTransition()
 
   function handleClick(locale: string) {
     startTransition(() => {
