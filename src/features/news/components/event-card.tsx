@@ -35,7 +35,7 @@ function CareerRow({ person }: { person: Exclude<News['event'], string>[number] 
   )
 }
 
-export default function EventCard({ date, event, type }: News) {
+export default function EventCard({ date, event, type, pinned }: News) {
   // 就业去向（career）：event 是 Career[]。桌面端用表格，移动端折叠成卡片式列表，
   // 避免 6 列被挤在小屏幕上。
   if (type === 'career' && Array.isArray(event)) {
@@ -95,7 +95,7 @@ export default function EventCard({ date, event, type }: News) {
       <CardContent>
         {typeof event === 'string' ? (
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
-            <div className="shrink-0 text-muted-foreground">{date}</div>
+            <div className="shrink-0 text-muted-foreground">{pinned ? '置顶' : date}</div>
             <div className="min-w-0 wrap-break-words">{event}</div>
           </div>
         ) : null}

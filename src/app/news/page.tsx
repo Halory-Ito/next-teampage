@@ -18,13 +18,18 @@ export default function NewsPage() {
     return years.includes(current) ? current : (years[0] ?? current)
   })
 
-  // 按年份筛选，同年内日期从新到旧。
   const visibleNews = useMemo(
     () =>
       news
         .filter((item) => item.date.startsWith(selectedYear))
-        .sort((a, b) => b.date.localeCompare(a.date)),
-    [selectedYear],
+        .sort((a, b) => {
+          // 先按置顶排序：置顶的在前
+          if (a.pinned && !b.pinned) return -1
+          if (!a.pinned && b.pinned) return 1
+          // 如果置顶状态相同，按日期降序
+          return b.date.localeCompare(a.date)
+        }),
+    [selectedYear, news],
   )
 
   return (

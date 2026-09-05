@@ -12,7 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
-const navItems = [
+export const navItems = [
   {
     title: 'home',
     href: '/',
@@ -31,6 +31,9 @@ const navItems = [
   },
 ]
 
+const isActive = (pathname: string, href: string) =>
+  pathname === href || (href !== '/' && pathname.startsWith(href))
+
 export default function AppNav() {
   const t = useTranslations('Layout.Navigation')
   const pathname = usePathname()
@@ -40,7 +43,7 @@ export default function AppNav() {
         {navItems.map((item) => (
           <NavigationMenuItem key={item.title}>
             <NavigationMenuLink
-              active={pathname.startsWith(item.href)}
+              active={isActive(pathname, item.href)}
               className={navigationMenuTriggerStyle()}
               render={<Link href={item.href}>{t(item.title)}</Link>}
             />

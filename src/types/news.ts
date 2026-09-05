@@ -1,7 +1,8 @@
 export type News = {
   date: string
-  type: 'career' | 'paper' | 'award' | 'report' | 'course'
+  type: 'career' | 'paper' | 'award' | 'report' | 'course' | 'recruit'
   event: string | Career[]
+  pinned?: boolean
 }
 
 type Career = {

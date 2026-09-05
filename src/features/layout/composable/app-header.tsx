@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 
 import AppLogo from '../components/app-logo'
 import AppNav from '../components/app-nav'
+import MobileNav from '../components/mobile-nav'
 
 export default function AppHeader() {
   const { scrollY } = useScroll()
@@ -28,8 +29,11 @@ export default function AppHeader() {
       )}
     >
       <AppLogo />
-      <AppNav />
-      <div className="flex items-center gap-2">
+      <div className="hidden md:block">
+        <AppNav />
+      </div>
+      <div className="flex items-center gap-1 sm:gap-2">
+        <MobileNav />
         <LocaleToggle />
         <ModeToggle />
       </div>
