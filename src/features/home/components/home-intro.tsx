@@ -1,11 +1,12 @@
 import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { teachers } from '@/data/team/teachers'
+import { getTeamByRole } from '@/data/team'
+import type { Locale } from '@/i18n/config'
 
 /**
  * 首页 · 基本介绍
@@ -17,7 +18,8 @@ const PARAGRAPH_KEYS = ['p1', 'p2'] as const
 
 export default async function HomeIntro() {
   const t = await getTranslations('Home.Intro')
-  const leader = teachers[0]
+  const locale = (await getLocale()) as Locale
+  const leader = getTeamByRole(locale).teacher[0]
   if (!leader) return null
 
   const highlights = t.raw('highlights') as string[]

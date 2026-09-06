@@ -1,0 +1,54 @@
+// TODO(i18n): English placeholder — content mirrors zh-cn until translated
+
+import { News } from '@/types/news'
+
+export const news2022: News[] = [
+  {
+    date: '2022-03-25',
+    type: 'paper',
+    event:
+      '团队2020级硕士研究生顾一鸣的论文“基于多尺度特征融合的遥感图像全色锐化方法”被Neurocomputing录用',
+  },
+  {
+    date: '2022-06-01',
+    type: 'career',
+    event: [
+      {
+        id: 'linyu',
+        name: '林语',
+        grade: 2019,
+        signed: '北京字节跳动科技有限公司',
+        intents: ['北京百度网讯科技有限公司'],
+        position: '算法工程师',
+        honors: ['一等学业奖学金（2020）', '国家奖学金（2021）'],
+      },
+      {
+        id: 'suyue',
+        name: '苏悦',
+        grade: 2019,
+        signed: '重庆长安汽车股份有限公司',
+        intents: ['中国汽车工程研究院股份有限公司'],
+        position: '大数据开发工程师',
+        honors: ['二等学业奖学金（2020）', '三等学业奖学金（2021）'],
+      },
+    ],
+  },
+  {
+    date: '2022-06-28',
+    type: 'paper',
+    event:
+      '2019级硕士研究生杨知微硕士毕业论文“面向高光谱图像超分辨率重建的深度展开网络研究”被答辩组推荐为校级优秀硕士毕业论文',
+  },
+  {
+    date: '2022-08-16',
+    type: 'award',
+    event:
+      '团队本科生项目“慧视遥感——高分辨率遥感图像智能处理平台”荣获第八届中国国际“互联网+”大学生创新创业大赛重庆赛区金奖',
+  },
+  {
+    date: '2022-11-18',
+    type: 'report',
+    event:
+      '雷大江教授应邀在“数据要素与人工智能”重庆青年学者论坛作题为《遥感大数据的智能计算》的特邀学术报告',
+  },
+]

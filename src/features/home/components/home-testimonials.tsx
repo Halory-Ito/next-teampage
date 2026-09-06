@@ -1,7 +1,8 @@
 import { Quote } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
-import { homeTestimonials } from '@/data/home/testimonials'
+import { testimonialsByLocale } from '@/data/home'
+import type { Locale } from '@/i18n/config'
 
 import SectionHeading from './section-heading'
 
@@ -20,6 +21,8 @@ function avatarInitial(name: string): string {
 
 export default async function HomeTestimonials() {
   const t = await getTranslations('Home.Testimonials')
+  const locale = (await getLocale()) as Locale
+  const homeTestimonials = testimonialsByLocale[locale]
 
   if (homeTestimonials.length === 0) {
     return (

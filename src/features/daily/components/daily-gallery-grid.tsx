@@ -1,6 +1,7 @@
 'use client'
 
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
@@ -17,6 +18,7 @@ type DailyGalleryGridProps = {
  * MorphSlider 依赖 WebGL / gsap，仅在打开时挂载，关闭即销毁，避免常驻开销。
  */
 export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
+  const t = useTranslations('Daily')
   const [active, setActive] = useState<DailyGallery | null>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const lastFocused = useRef<HTMLElement | null>(null)
@@ -66,7 +68,9 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
   )
 
   if (galleries.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">该板块暂无相册</p>
+    return (
+      <p className="py-8 text-center text-sm text-muted-foreground">{t('emptyAlbums')}</p>
+    )
   }
 
   return (
@@ -77,7 +81,7 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
             key={`${g.name}-${g.date}`}
             role="button"
             tabIndex={0}
-            aria-label={`打开相册：${g.name}`}
+            aria-label={t('openAlbum', { name: g.name })}
             onClick={() => open(g)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -102,7 +106,9 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
                 <span className="shrink-0 text-xs text-muted-foreground">{g.date}</span>
               </div>
               {g.description && <p className="text-sm text-muted-foreground">{g.description}</p>}
-              <p className="text-xs text-muted-foreground">{g.gallery.length} 张照片</p>
+              <p className="text-xs text-muted-foreground">
+                {t('photoCount', { count: g.gallery.length })}
+              </p>
             </div>
           </article>
         ))}
@@ -113,7 +119,7 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
           ref={overlayRef}
           role="dialog"
           aria-modal="true"
-          aria-label={`相册：${active.name}`}
+          aria-label={t('albumTitle', { name: active.name })}
           className="fixed inset-0 z-[60] bg-[#0c0c0e]"
         >
           <MorphSlider
@@ -132,7 +138,7 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
             <div className="flex flex-col gap-1">
               <h2 className="font-heading text-lg font-medium drop-shadow-sm">{active.name}</h2>
               <p className="text-sm text-white/75 drop-shadow-sm">
-                {active.date} · {active.gallery.length} 张照片
+                {active.date} · {t('photoCount', { count: active.gallery.length })}
               </p>
             </div>
             <Button
@@ -140,7 +146,7 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
               variant="ghost"
               size="icon"
               onClick={close}
-              aria-label="关闭相册"
+              aria-label={t('closeAlbum')}
               className="pointer-events-auto size-10 border-border/40 bg-background/45 text-foreground shadow-sm backdrop-blur-md hover:scale-105 hover:bg-background/75 active:scale-95 dark:hover:bg-background/75"
             >
               <X aria-hidden="true" className="size-[18px]" />

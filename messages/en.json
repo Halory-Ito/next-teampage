@@ -73,6 +73,19 @@
       "empty": "No testimonials yet."
     }
   },
+  "Daily": {
+    "backToAllBlocks": "Back to all blocks",
+    "titleFallback": "Daily Blocks",
+    "galleryCount": "{count, plural, one {1 album} other {{count} albums}}",
+    "emptyAlbums": "No albums in this block.",
+    "openAlbum": "Open album: {name}",
+    "albumTitle": "Album: {name}",
+    "closeAlbum": "Close album",
+    "photoCount": "{count, plural, one {1 photo} other {{count} photos}}"
+  },
+  "News": {
+    "empty": "No news for this year."
+  },
   "Team": {
     "Member": {
       "backToTeam": "Back to Team",

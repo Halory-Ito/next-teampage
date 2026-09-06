@@ -73,6 +73,19 @@
       "empty": "该板块暂无评价"
     }
   },
+  "Daily": {
+    "backToAllBlocks": "返回全部板块",
+    "titleFallback": "动态板块",
+    "galleryCount": "共 {count} 个相册",
+    "emptyAlbums": "该板块暂无相册",
+    "openAlbum": "打开相册：{name}",
+    "albumTitle": "相册：{name}",
+    "closeAlbum": "关闭相册",
+    "photoCount": "{count} 张照片"
+  },
+  "News": {
+    "empty": "该年份暂无动态"
+  },
   "Team": {
     "Member": {
       "backToTeam": "返回团队成员",

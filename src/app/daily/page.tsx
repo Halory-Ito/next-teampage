@@ -1,8 +1,14 @@
 'use client'
+import { useLocale } from 'next-intl'
+
 import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
-import { blocks } from '@/data/daily/blocks'
+import { getBlocks } from '@/data/daily'
+import type { Locale } from '@/i18n/config'
 
 export default function DailyPage() {
+  // 按当前语言取板块数据（useLocale() 为运行时语言，切换语言后自动更新）
+  const blocks = getBlocks(useLocale() as Locale)
+
   const items: ChromaItem[] = blocks.map((block) => ({
     image: block.cover,
     title: block.name,

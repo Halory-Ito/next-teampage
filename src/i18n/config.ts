@@ -1,4 +1,9 @@
 // 系统支持的语言列表
-export const locales = ['en', 'zh-cn']
+const locales = ['en', 'zh-cn'] as const
 
-export const defaultLocale = 'en'
+type Locale = (typeof locales)[number]
+
+export { locales }
+export type { Locale }
+
+export const defaultLocale: Locale = 'en'

@@ -11,11 +11,12 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import CountUp from '@/components/CountUp'
 import { Card, CardContent } from '@/components/ui/card'
 import { getHomeStats, getNewsYearRange, type HomeStatKey } from '@/features/home/lib/home-stats'
+import type { Locale } from '@/i18n/config'
 
 import SectionHeading from './section-heading'
 
@@ -40,8 +41,9 @@ const STAT_ITEMS: { key: HomeStatKey; icon: LucideIcon }[] = [
 
 export default function HomeStats() {
   const t = useTranslations('Home.Stats')
-  const stats = getHomeStats()
-  const range = getNewsYearRange()
+  const locale = useLocale() as Locale
+  const stats = getHomeStats(locale)
+  const range = getNewsYearRange(locale)
 
   return (
     <section aria-labelledby="stats-title" className="flex w-full flex-col gap-8">

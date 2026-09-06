@@ -18,7 +18,7 @@ export async function getUserLocale() {
   const parsedLocale = acceptLanguage?.split(',')[0].split('-')[0]
 
   // 如果不在系统支持的语言列表，使用默认语言
-  return locales.includes(parsedLocale!) ? parsedLocale : defaultLocale
+  return (locales as readonly string[]).includes(parsedLocale!) ? parsedLocale : defaultLocale
 }
 
 export async function setUserLocale(locale: string) {

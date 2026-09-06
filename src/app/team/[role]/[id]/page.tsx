@@ -1,16 +1,19 @@
 import { ArrowLeft } from 'lucide-react'
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { allMembers, findMember } from '@/data/team'
-import MemberBiography from '@/features/team/components/member-biography'
-import MemberEducation from '@/features/team/components/member-education'
-import MemberProfile from '@/features/team/components/member-profile'
-import MemberPublications from '@/features/team/components/member-publications'
-import MemberResearch from '@/features/team/components/member-research'
-import MemberWorkHistory from '@/features/team/components/member-work-history'
+import type { Locale } from '@/i18n/config'
+import {
+  MemberBiography,
+  MemberEducation,
+  MemberProfile,
+  MemberPublications,
+  MemberResearch,
+  MemberWorkHistory,
+} from '@/features/team'
 
 type PageProps = {
   params: Promise<{ role: string; id: string }>
@@ -26,7 +29,8 @@ export const dynamicParams = false
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { role, id } = await params
-  const member = findMember(role, id)
+  const locale = (await getLocale()) as Locale
+  const member = findMember(locale, role, id)
   if (!member) return {}
 
   const displayName = member.nameEn ? `${member.name} · ${member.nameEn}` : member.name
@@ -45,7 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function MemberPage({ params }: PageProps) {
   const { role, id } = await params
-  const member = findMember(role, id)
+  const locale = (await getLocale()) as Locale
+  const member = findMember(locale, role, id)
   if (!member) notFound()
 
   const t = await getTranslations('Team.Member')

@@ -6,6 +6,12 @@ export type News = {
   type: 'career' | 'education' | 'paper' | 'award' | 'report' | 'course' | 'recruit' | 'project'
   event: string | Career[]
   pinned?: boolean
+  links?: LinkItem[]
+}
+
+type LinkItem = {
+  label: string
+  url: string
 }
 
 type Career = {
