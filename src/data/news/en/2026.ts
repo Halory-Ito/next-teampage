@@ -2,13 +2,6 @@ import { News } from '@/types/news'
 
 export const news2026: News[] = [
   {
-    date: '2026-06-01',
-    type: 'recruit',
-    pinned: true,
-    event:
-      'The 2027 recruitment QQ group "173394663" is now open. The interview covers frontend/backend development programming skills plus algorithm implementation (choose one of C, C++, Java); preference is given to applicants with frontend/backend project portfolios. The algorithm part covers core data structures, greedy, dynamic programming, divide and conquer, and backtracking. Interested students can join the group to learn about our needs before the interview, use the interview to identify gaps between their current skills and our requirements, study the gaps and take a second interview, and even lock an early offer by passing the interview.',
-  },
-  {
     date: '2026-06-08',
     type: 'career',
     event: [
@@ -19,7 +12,10 @@ export const news2026: News[] = [
         signed: 'Hangzhou Huawei Cloud Computing Technology Co., Ltd.',
         intents: ['Hikvision', 'Zhongke Zidong Taichu (Beijing) Technology Co., Ltd.'],
         position: 'Software Development Engineer',
-        honors: ['Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2025)'],
+        honors: [
+          'Third-Class Academic Scholarship (2024)',
+          'Third-Class Academic Scholarship (2025)',
+        ],
       },
       {
         id: '陈洪金',
@@ -28,7 +24,10 @@ export const news2026: News[] = [
         signed: 'HiSilicon Technologies Co., Ltd.',
         intents: ['Chengdu Zhangyi Technology Co., Ltd.'],
         position: 'Software Development Engineer',
-        honors: ['Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2025)'],
+        honors: [
+          'Third-Class Academic Scholarship (2024)',
+          'Third-Class Academic Scholarship (2025)',
+        ],
       },
       {
         id: '张凯',
@@ -37,7 +36,11 @@ export const news2026: News[] = [
         signed: 'iFlytek Co., Ltd.',
         intents: [],
         position: 'Java Engineer',
-        honors: ['Special-Class Academic Scholarship (2025)', 'Second-Class Academic Scholarship (2024)', 'Second-Class Academic Scholarship (2023)'],
+        honors: [
+          'Special-Class Academic Scholarship (2025)',
+          'Second-Class Academic Scholarship (2024)',
+          'Second-Class Academic Scholarship (2023)',
+        ],
       },
       {
         id: '何霁衡',
@@ -46,7 +49,11 @@ export const news2026: News[] = [
         signed: 'Seres Automobile Co., Ltd.',
         intents: ['China Mobile IoT'],
         position: 'Software Development Engineer',
-        honors: ['Second-Class Academic Scholarship (2025)', 'Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2023)'],
+        honors: [
+          'Second-Class Academic Scholarship (2025)',
+          'Third-Class Academic Scholarship (2024)',
+          'Third-Class Academic Scholarship (2023)',
+        ],
       },
       {
         id: '王云倩',
@@ -55,7 +62,11 @@ export const news2026: News[] = [
         signed: 'Pengzhou Municipal People\u2019s Government street office',
         intents: [],
         position: 'Information Management',
-        honors: ['Third-Class Academic Scholarship (2025)', 'Second-Class Academic Scholarship (2024)', 'First-Class Academic Scholarship (2023)'],
+        honors: [
+          'Third-Class Academic Scholarship (2025)',
+          'Second-Class Academic Scholarship (2024)',
+          'First-Class Academic Scholarship (2023)',
+        ],
       },
     ],
   },

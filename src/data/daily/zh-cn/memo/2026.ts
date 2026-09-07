@@ -12,7 +12,10 @@ export const memo2026: DailyGallery[] = [
     gallery: [
       { url: img('daily-memo-1'), name: '实验调试' },
       { url: img('daily-memo-2'), name: '工位一角' },
-      { url: img('daily-memo-3'), name: '深夜加班' },
+      {
+        url: img('daily-memo-3'),
+        name: '深夜加班',
+      },
     ],
   },
 ]

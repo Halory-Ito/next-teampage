@@ -3,7 +3,7 @@ import { DailyGallery } from '@/types/daily'
 /** 示例相册图片使用 picsum.photos 网图（seed 固定，URL 稳定可复现） */
 const img = (seed: string, w = 1200, h = 800) => `https://picsum.photos/seed/${seed}/${w}/${h}`
 
-export const tuanjian2026: DailyGallery[] = [
+export const builds2026: DailyGallery[] = [
   {
     date: '2026-03-28',
     name: '春季踏青团建',

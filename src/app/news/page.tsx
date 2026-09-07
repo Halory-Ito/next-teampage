@@ -66,7 +66,7 @@ export default function NewsPage() {
   }, [])
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4">
+    <div className="mx-auto max-w-5xl flex w-full flex-col gap-4">
       {years.length > 0 && (
         <div className="relative h-44 w-full">
           <OptionWheel

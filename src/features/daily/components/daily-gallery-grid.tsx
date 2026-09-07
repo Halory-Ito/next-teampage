@@ -68,14 +68,12 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
   )
 
   if (galleries.length === 0) {
-    return (
-      <p className="py-8 text-center text-sm text-muted-foreground">{t('emptyAlbums')}</p>
-    )
+    return <p className="py-8 text-center text-sm text-muted-foreground">{t('emptyAlbums')}</p>
   }
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 ">
         {galleries.map((g) => (
           <article
             key={`${g.name}-${g.date}`}
@@ -120,7 +118,7 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
           role="dialog"
           aria-modal="true"
           aria-label={t('albumTitle', { name: active.name })}
-          className="fixed inset-0 z-[60] bg-[#0c0c0e]"
+          className="fixed inset-0 z-60"
         >
           <MorphSlider
             items={sliderItems}
@@ -131,13 +129,10 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
             showIndicators
           />
 
-          <header
-            className="pointer-events-none absolute inset-x-0 top-0 z-[4] flex items-start justify-between gap-4 p-4 text-white sm:p-6"
-            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), transparent)' }}
-          >
+          <header className="pointer-events-none bg-linear-to-b from-primary-foreground/80 to-transparent absolute inset-x-0 top-0 z-4 flex items-start justify-between gap-4 p-4 sm:p-6">
             <div className="flex flex-col gap-1">
-              <h2 className="font-heading text-lg font-medium drop-shadow-sm">{active.name}</h2>
-              <p className="text-sm text-white/75 drop-shadow-sm">
+              <div className="font-heading text-lg font-medium drop-shadow-sm">{active.name}</div>
+              <p className="text-sm drop-shadow-sm">
                 {active.date} · {t('photoCount', { count: active.gallery.length })}
               </p>
             </div>
@@ -147,9 +142,9 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
               size="icon"
               onClick={close}
               aria-label={t('closeAlbum')}
-              className="pointer-events-auto size-10 border-border/40 bg-background/45 text-foreground shadow-sm backdrop-blur-md hover:scale-105 hover:bg-background/75 active:scale-95 dark:hover:bg-background/75"
+              className="pointer-events-auto bg-background/45 text-foreground hover:bg-background/75 dark:hover:bg-background/75"
             >
-              <X aria-hidden="true" className="size-[18px]" />
+              <X aria-hidden="true" className="size-4" />
             </Button>
           </header>
         </div>

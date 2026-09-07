@@ -1,10 +1,10 @@
 import { DailyGallery } from '@/types/daily'
 
+import { builds } from './build'
 import { competitions } from './competition'
 import { meetings } from './meeting'
 import { memos } from './memo'
 import { plogs } from './plog'
-import { tuanjians } from './tuanjian'
 
 /**
  * block.id -> 该板块下的所有 gallery（相册）。
@@ -13,7 +13,7 @@ import { tuanjians } from './tuanjian'
 const blockGalleries: Record<string, DailyGallery[]> = {
   competition: competitions,
   meeting: meetings,
-  tuanjian: tuanjians,
+  build: builds,
   memo: memos,
   plog: plogs,
 }

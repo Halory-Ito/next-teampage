@@ -72,7 +72,7 @@ export default function JoinUsPage() {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-10 pb-16 sm:gap-12 lg:px-0">
+    <main className="mx-auto max-w-5xl flex w-full flex-col gap-10 px-4 py-10 pb-16 sm:gap-12 lg:px-0">
       {/* 页首：招生对象入口 */}
       <header className="flex flex-col items-center gap-2.5 text-center">
         <h1 className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
@@ -102,9 +102,7 @@ export default function JoinUsPage() {
               <ul className="flex flex-wrap gap-2">
                 {data.researchAreas.map((area) => (
                   <li key={area}>
-                    <Badge variant="outline" className="px-3 py-1 text-xs font-normal">
-                      {area}
-                    </Badge>
+                    <Badge variant="secondary">{area}</Badge>
                   </li>
                 ))}
               </ul>
@@ -173,9 +171,7 @@ export default function JoinUsPage() {
               <ul className="mt-3 flex flex-wrap gap-2">
                 {data.algorithmTopics.map((topic) => (
                   <li key={topic}>
-                    <Badge variant="outline" className="px-3 py-1 text-xs font-normal">
-                      {topic}
-                    </Badge>
+                    <Badge variant="secondary">{topic}</Badge>
                   </li>
                 ))}
               </ul>

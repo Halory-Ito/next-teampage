@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
-
 import { useLocale, useTranslations } from 'next-intl'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import OptionWheel from '@/components/OptionWheel'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -104,7 +103,7 @@ export default function TeamPage() {
               fontSize={1.1}
               // PC 端尺寸与 news 页保持一致：h-44 容器 + 3rem 字号，
               // 其余参数（spacing/curve/tilt 等）为组件默认值，与 news 页传入的显式值一致
-              className="h-full w-full lg:[&>div]:[font-size:3rem]!"
+              className="h-full w-full lg:[&>div]:text-[3rem]!"
             />
           </div>
         )}
@@ -115,7 +114,7 @@ export default function TeamPage() {
         </Tabs>
       </div>
 
-      <div className="w-full grid grid-cols-1 content-start sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 px-4">
+      <div className="w-full max-w-5xl grid grid-cols-1 mx-auto lg:grid-cols-2 gap-4 px-4">
         {data.map((stu) => (
           <MemberCard key={stu.id} {...stu} />
         ))}

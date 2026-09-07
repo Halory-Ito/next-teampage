@@ -797,7 +797,7 @@ export default function MorphSlider({
     >
       <div
         ref={containerRef}
-        className="absolute inset-0 cursor-grab outline-none active:cursor-grabbing focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring/80"
+        className="absolute inset-0 cursor-grab outline-none active:cursor-grabbing focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-ring/80"
         role="group"
         aria-roledescription="carousel"
         aria-label="Image morph slider"
@@ -807,7 +807,7 @@ export default function MorphSlider({
 
       {showCaptions && hasCaptions && (
         <div
-          className="morph-slider-caption pointer-events-none absolute bottom-5.5 left-5.5 z-2 grid max-w-[70%]"
+          className="morph-slider-caption pointer-events-none p-2 absolute bottom-16 z-2 grid max-w-4/5"
           aria-live="polite"
         >
           {items.map((item, i) =>
@@ -816,7 +816,7 @@ export default function MorphSlider({
                 key={i}
                 aria-hidden={i === index ? undefined : true}
                 variant="outline"
-                className={`morph-slider-caption-text pointer-events-none h-auto w-fit max-w-full rounded-[10px] border-border/60 bg-background/55 px-[14px] py-[8px] text-[15px] font-semibold tracking-[0.01em] text-foreground whitespace-normal shadow-sm backdrop-blur-[8px] [grid-area:1/1] [justify-self:start] [transition:opacity_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),transform_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),filter_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1)] ${
+                className={`morph-slider-caption-text pointer-events-none h-auto w-fit max-w-full rounded-[10px] border-border/60 bg-background/55 px-2 text-[15px] font-semibold tracking-[0.01em] text-foreground whitespace-normal shadow-sm backdrop-blur-sm [grid-area:1/1] [justify-self:start] [transition:opacity_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),transform_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1),filter_var(--ms-swap)_cubic-bezier(0.16,1,0.3,1)] ${
                   i === index
                     ? 'opacity-100 transform:translateY(0) filter:blur(0)'
                     : 'opacity-0 transform:translateY(12px) filter:blur(6px)'
@@ -856,11 +856,11 @@ export default function MorphSlider({
 
       {showIndicators && (
         <div
-          className="absolute inset-x-0 bottom-[18px] z-[3] flex items-center justify-center"
+          className="absolute inset-x-0 bottom-4 z-3 flex items-center justify-center"
           role="tablist"
           aria-label="Slides"
         >
-          <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-background/45 px-2 py-1.5 shadow-sm backdrop-blur-md">
+          <div className="flex items-center gap-2 rounded-full bg-background/45 px-2 py-1.5 shadow-sm">
             {items.map((item, i) => (
               <button
                 key={i}
@@ -869,9 +869,7 @@ export default function MorphSlider({
                 aria-selected={i === index}
                 aria-label={`Go to slide ${i + 1}`}
                 className={`h-2 cursor-pointer rounded-full outline-none [transition:width_var(--ms-dot)_cubic-bezier(0.16,1,0.3,1),background-color_var(--ms-dot)_ease] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
-                  i === index
-                    ? 'w-[22px] bg-foreground'
-                    : 'w-2 bg-foreground/35 hover:bg-foreground/60'
+                  i === index ? 'w-4 bg-foreground' : 'w-2 bg-foreground/35 hover:bg-foreground/60'
                 }`}
                 onClick={() => {
                   const engine = engineRef.current

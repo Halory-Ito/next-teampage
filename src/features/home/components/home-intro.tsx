@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -39,7 +39,7 @@ export default async function HomeIntro() {
           <div className="flex flex-col items-start gap-5">
             <h1
               id="intro-title"
-              className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+              className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-4xl"
             >
               {t('title')}
             </h1>
@@ -80,8 +80,8 @@ export default async function HomeIntro() {
           </div>
 
           {/* 负责人卡片 */}
-          <div className="relative mx-auto w-full max-w-[300px]">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-muted ring-1 ring-foreground/10">
+          <div className="relative mx-auto w-full max-w-75">
+            <div className="relative aspect-4/5 w-full overflow-hidden rounded-3xl bg-muted ring-1 ring-foreground/10">
               <Image
                 src={leader.avatarUrl}
                 alt={leaderName}
@@ -94,10 +94,8 @@ export default async function HomeIntro() {
               <p className="font-heading text-center text-lg font-semibold tracking-tight">
                 {leaderName}
               </p>
-              <div className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                <Badge variant="secondary" className="font-normal">
-                  {leader.career}
-                </Badge>
+              <div className="mt-1.5 flex flex-wrap justify-center items-center gap-2 text-sm text-muted-foreground">
+                <Badge variant="secondary">{leader.career}</Badge>
                 <span>{t('leaderLabel')}</span>
               </div>
             </div>

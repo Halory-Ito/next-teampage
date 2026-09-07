@@ -25,22 +25,22 @@ function WorkRow({ work, typeLabel }: { work: OrcidWork; typeLabel: string }) {
   const body = (
     <>
       {/* 年份栏：窄屏隐藏，移动端年份显示在底部 meta 中 */}
-      <div className="hidden w-14 shrink-0 justify-end pt-1 sm:flex" aria-hidden="true">
+      <div className="hidden shrink-0 justify-end pt-1 sm:flex" aria-hidden="true">
         <span className="text-sm font-semibold tabular-nums text-muted-foreground/70">
           {work.year ?? '—'}
         </span>
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+      <div className="flex min-w-0 flex-1 flex-col gap-2">
         {/* 标题 + 外链指示 */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="min-w-0 text-base leading-snug font-medium text-pretty">{work.title}</h3>
-          {href && (
+          <div className="min-w-0 text-base leading-snug font-medium text-pretty">{work.title}</div>
+          {/*{href && (
             <ExternalLink
               className="mt-1 size-4 shrink-0 text-muted-foreground/60 opacity-0 transition-opacity group-hover:opacity-100"
               aria-hidden="true"
             />
-          )}
+          )}*/}
         </div>
 
         {/* 出处（期刊/会议等），最多两行 */}
@@ -52,10 +52,10 @@ function WorkRow({ work, typeLabel }: { work: OrcidWork; typeLabel: string }) {
 
         {/* 类型 / 年份(移动端) / DOI */}
         <div className="flex flex-wrap items-center gap-2.5 pt-1.5 text-xs text-muted-foreground">
-          <Badge variant="secondary">{typeLabel}</Badge>
           {work.year && <span className="tabular-nums sm:hidden">{work.year}</span>}
+          <Badge variant="secondary">{typeLabel}</Badge>
           {work.doi && (
-            <Badge variant="outline" className="min-w-0 max-w-full font-mono">
+            <Badge variant="secondary">
               <span className="truncate">DOI: {work.doi}</span>
             </Badge>
           )}
@@ -128,7 +128,7 @@ export default function PublicationsList({ works }: { works: OrcidWork[] }) {
 
   return (
     <div ref={topRef} className="flex scroll-mt-36 flex-col">
-      <div className="flex items-center justify-between gap-2 px-1 pb-1 text-xs text-muted-foreground">
+      <div className="flex items-center justify-between gap-2 mb-2 text-xs text-muted-foreground">
         <span>{t('paperSummary', { total: works.length, pageSize: PAGE_SIZE })}</span>
         {pageCount > 1 && (
           <span className="tabular-nums">
@@ -137,7 +137,7 @@ export default function PublicationsList({ works }: { works: OrcidWork[] }) {
         )}
       </div>
 
-      <ol className="flex flex-col divide-y divide-border">
+      <ol className="flex flex-col">
         {pageWorks.map((work) => {
           const typeKey = `paperTypes.${work.type}`
           return (

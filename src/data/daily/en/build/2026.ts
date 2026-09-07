@@ -3,7 +3,7 @@ import { DailyGallery } from '@/types/daily'
 /** Sample album images use picsum.photos (fixed seeds → stable, reproducible URLs) */
 const img = (seed: string, w = 1200, h = 800) => `https://picsum.photos/seed/${seed}/${w}/${h}`
 
-export const tuanjian2026: DailyGallery[] = [
+export const builds2026: DailyGallery[] = [
   {
     date: '2026-03-28',
     name: 'Spring Outing',

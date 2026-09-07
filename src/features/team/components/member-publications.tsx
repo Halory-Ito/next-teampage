@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
 import { AlertCircle, BookOpen, ExternalLink } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
+import { Suspense } from 'react'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'

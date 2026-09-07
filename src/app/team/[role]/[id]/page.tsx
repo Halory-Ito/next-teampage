@@ -59,7 +59,7 @@ export default async function MemberPage({ params }: PageProps) {
 
   return (
     <div className="w-full">
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="mx-auto max-w-5xl w-full">
         <Link
           href="/team"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"

@@ -32,7 +32,7 @@ export default async function DailyBlockPage({ params }: PageProps) {
   const galleries = getBlockGalleries(locale, id)
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+    <div className="mx-auto max-w-4xl flex w-full flex-col gap-6">
       <header className="flex flex-col gap-4">
         <Link
           href="/daily"

@@ -37,11 +37,11 @@ export default function MemberExperienceItem({
   const period = formatMemberPeriod(startDate, endDate, presentLabel)
 
   return (
-    <li className="flex items-start gap-4 px-3 py-4">
-      <p className="hidden w-32 shrink-0 justify-end pt-0.5 text-sm tabular-nums text-muted-foreground/70 sm:flex">
+    <li className="flex items-start gap-4 py-4">
+      <p className="flex-1 hidden shrink-0 justify-start text-sm tabular-nums text-muted-foreground/70 sm:flex">
         {period}
       </p>
-      <div className="flex min-w-0 flex-1 flex-col gap-1">
+      <div className="flex-4 flex min-w-0 flex-col gap-1">
         <p className="text-xs font-medium tabular-nums text-muted-foreground/70 sm:hidden">
           {period}
         </p>

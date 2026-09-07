@@ -18,7 +18,7 @@ export default function DailyPage() {
     subtitle: block.description,
   }))
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-3xl items-center justify-center">
+    <div className="mx-auto max-w-3xl flex min-h-[calc(100dvh-8rem)] w-full items-center justify-center">
       <ChromaGrid items={items} radius={300} damping={0.45} fadeOut={0.6} ease="power3.out" />
     </div>
   )

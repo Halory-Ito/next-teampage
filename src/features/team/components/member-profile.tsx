@@ -23,7 +23,7 @@ function buildMemberLinks(member: Member, homepageLabel: string): MemberLink[] {
   if (member.orcid)
     links.push({
       href: `https://orcid.org/${member.orcid}`,
-      label: `ORCID · ${member.orcid}`,
+      label: `ORCID`,
       icon: BadgeCheck,
     })
   return links
@@ -44,7 +44,7 @@ export default async function MemberProfile({ member }: { member: Member }) {
       <Card className="overflow-hidden p-0">
         <div className="flex flex-col">
           {/* 头像 + 基本信息：小屏左右横排，lg+ 改为上下通栏 */}
-          <div className="flex items-center gap-4 p-5 lg:block lg:p-0">
+          <div className="flex items-center gap-4 p-4 lg:block lg:p-0">
             <Image
               src={member.avatarUrl}
               alt={t('avatarAlt', { name: primaryName })}
@@ -74,11 +74,8 @@ export default async function MemberProfile({ member }: { member: Member }) {
 
           {links.length > 0 && (
             <>
-              <Separator className="mx-5 lg:mx-6" />
-              <ul
-                className="flex flex-col gap-0.5 px-5 pt-4 pb-5 lg:px-6 lg:pt-4 lg:pb-6"
-                aria-label={t('contactLinks')}
-              >
+              <Separator />
+              <ul className="flex flex-col gap-0.5 p-2" aria-label={t('contactLinks')}>
                 {links.map(({ href, label, icon: Icon }) => (
                   <li key={href}>
                     <a
