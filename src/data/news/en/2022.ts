@@ -1,54 +1,58 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { News } from '@/types/news'
 
 export const news2022: News[] = [
   {
-    date: '2022-03-25',
-    type: 'paper',
+    date: '2022-02-22',
+    type: 'course',
     event:
-      '团队2020级硕士研究生顾一鸣的论文“基于多尺度特征融合的遥感图像全色锐化方法”被Neurocomputing录用',
-  },
-  {
-    date: '2022-06-01',
-    type: 'career',
-    event: [
+      'Our machine learning monograph "Distributed Machine Learning — Applications of the Alternating Direction Method of Multipliers in Machine Learning" is now on sale at JD.com.',
+    links: [
       {
-        id: 'linyu',
-        name: '林语',
-        grade: 2019,
-        signed: '北京字节跳动科技有限公司',
-        intents: ['北京百度网讯科技有限公司'],
-        position: '算法工程师',
-        honors: ['一等学业奖学金（2020）', '国家奖学金（2021）'],
-      },
-      {
-        id: 'suyue',
-        name: '苏悦',
-        grade: 2019,
-        signed: '重庆长安汽车股份有限公司',
-        intents: ['中国汽车工程研究院股份有限公司'],
-        position: '大数据开发工程师',
-        honors: ['二等学业奖学金（2020）', '三等学业奖学金（2021）'],
+        label: 'Buy on JD.com',
+        url: 'https://item.jd.com/12872097.html',
       },
     ],
   },
   {
-    date: '2022-06-28',
-    type: 'paper',
-    event:
-      '2019级硕士研究生杨知微硕士毕业论文“面向高光谱图像超分辨率重建的深度展开网络研究”被答辩组推荐为校级优秀硕士毕业论文',
-  },
-  {
-    date: '2022-08-16',
+    date: '2022-03-25',
     type: 'award',
     event:
-      '团队本科生项目“慧视遥感——高分辨率遥感图像智能处理平台”荣获第八届中国国际“互联网+”大学生创新创业大赛重庆赛区金奖',
+      'Congratulations to 2020-class graduate students Luo Xin and Huang Jin on being named Outstanding Graduate Student Cadres for the 2020–2021 academic year.',
   },
   {
-    date: '2022-11-18',
-    type: 'report',
+    date: '2022-04-21',
+    type: 'award',
     event:
-      '雷大江教授应邀在“数据要素与人工智能”重庆青年学者论坛作题为《遥感大数据的智能计算》的特邀学术报告',
+      'Congratulations to our 2019-class graduate students on their academic scholarships and National Scholarships: Chen Hao (Second-Class Academic, National Scholarship), Huang Jie (First-Class Academic), Wu Kaili (National Scholarship), Huang Hefeng (Second-Class Academic), Ran Gangsheng (First-Class Academic), Bai Menghao (Second-Class Academic).',
+  },
+  {
+    date: '2022-06-15',
+    type: 'award',
+    event:
+      'Congratulations to 2019-class graduate students Chen Hao and Huang Yihang, whose theses were both selected as 2022 university-level Outstanding Master\u2019s Theses (Chen Hao: pansharpening via a residual network fusing spectral attention and feature consistency; Huang Yihang: a pansharpening method based on multi-branch residual networks).',
+  },
+  {
+    date: '2022-07-01',
+    type: 'paper',
+    event:
+      'Congratulations to master\u2019s student Huang Jin whose paper "MDANet: A multi-scale dense pansharpening method based on adaptive optimization" was accepted by IEEE Transactions on Geoscience and Remote Sensing, a CCF-B / CAS-2-Top journal.',
+  },
+  {
+    date: '2022-08-18',
+    type: 'award',
+    event:
+      'Our undergraduate teams won 1 national first prize and 2 national third prizes in the 15th China Collegiate Computing Contest (2022): Liang Zilong, Liang Shurui and Peng Xiao won the national first prize for "AI Smart Badminton Serving System"; Fu Hongrui, Li Chengjia and Deng Xianlang won the national third prize for "A Social Media Sentiment Analysis System Based on Spark MLlib and Ensemble Learning"; Wu Xiang, Shen Guangyao and Wang Bodi won the national third prize for "EasyExercise — a Modular Online Programming Teaching Platform".',
+  },
+  {
+    date: '2022-09-06',
+    type: 'paper',
+    event:
+      'Congratulations to master\u2019s student Chen Peng whose paper "MCANet: A Multidimensional Channel Attention Residual Neural Network for Pansharpening" was accepted by IEEE Transactions on Geoscience and Remote Sensing, a CCF-B / CAS-2-Top journal.',
+  },
+  {
+    date: '2022-10-12',
+    type: 'education',
+    event:
+      'Congratulations to our undergraduate students on being recommended for graduate study without entrance exams: Liang Zilong (School of Informatics, Xiamen University), Liang Shurui (School of Computer Science and Engineering, South China University of Technology), Peng Xiao (School of Computer Science, Beijing University of Posts and Telecommunications), Wu Xiang (School of Computer Science and Technology, Xidian University).',
   },
 ]

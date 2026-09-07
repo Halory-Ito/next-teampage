@@ -1,5 +1,5 @@
 import { newsByLocale } from '@/data/news'
-import { projects } from '@/data/projects'
+import { getProjects } from '@/data/projects'
 import { teamByRoleByLocale } from '@/data/team'
 import type { Locale } from '@/i18n/config'
 import type { News } from '@/types/news'
@@ -60,7 +60,7 @@ export function getHomeStats(locale: Locale): HomeStats {
     // 获奖数：学科竞赛 / 奖学金等动态条数
     awards: countNewsEvents(news, 'award'),
     // 研发项目数：在研 / 已结题的纵向基金与横向课题
-    projects: projects.length,
+    projects: getProjects(locale).length,
   }
 }
 /** 动态数据的起止年份（用于“数据截止于 XXXX 年”提示，按语言取数） */

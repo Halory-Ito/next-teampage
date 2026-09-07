@@ -36,5 +36,5 @@ export function getTeamByRole(locale: Locale): TeamByRole {
  */
 export function findMember(locale: Locale, role: string, id: string): Member | undefined {
   const members = (teamByRoleByLocale[locale] as Record<string, Member[] | undefined>)[role]
-  return members?.find((member) => member.id === id)
+  return members?.find((member) => member.id === decodeURIComponent(id))
 }

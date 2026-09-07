@@ -29,7 +29,7 @@ export default async function HomeTestimonials() {
       <section className="w-full">
         <SectionHeading
           id="testimonials"
-          eyebrow={t('eyebrow')}
+          // eyebrow={t('eyebrow')}
           title={t('title')}
           description={t('description')}
         />
@@ -42,7 +42,7 @@ export default async function HomeTestimonials() {
     <section aria-labelledby="testimonials-title" className="flex w-full flex-col gap-8">
       <SectionHeading
         id="testimonials"
-        eyebrow={t('eyebrow')}
+        // eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
       />

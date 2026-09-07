@@ -1,11 +1,9 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { DailyGallery } from '@/types/daily'
 const prefix = '/images/daily/memo/2026'
 export const memo2026: DailyGallery[] = [
   {
     date: '2026-02-06',
-    name: 'Lab Daily2026',
+    name: 'Lab Daily 2026',
     cover: `${prefix}/cover.png`,
     gallery: [
       {

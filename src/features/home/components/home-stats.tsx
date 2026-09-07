@@ -47,12 +47,7 @@ export default function HomeStats() {
 
   return (
     <section aria-labelledby="stats-title" className="flex w-full flex-col gap-8">
-      <SectionHeading
-        id="stats"
-        eyebrow={t('eyebrow')}
-        title={t('title')}
-        description={t('description')}
-      />
+      <SectionHeading id="stats" title={t('title')} description={t('description')} />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {STAT_ITEMS.map((item, index) => {
@@ -79,11 +74,11 @@ export default function HomeStats() {
         })}
       </div>
 
-      {range ? (
+      {/*{range ? (
         <p className="text-center text-xs text-muted-foreground">
           {t('dataSource', { from: range.from, to: range.to })}
         </p>
-      ) : null}
+      ) : null}*/}
     </section>
   )
 }

@@ -1,65 +1,132 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { News } from '@/types/news'
 
 export const news2023: News[] = [
   {
-    date: '2023-02-14',
-    type: 'paper',
+    date: '2023-01-28',
+    type: 'course',
     event:
-      '团队2021级硕士研究生蔡明峻的论文“自适应全局-局部建模的非局部深度展开全色锐化网络”被IEEE Transactions on Geoscience and Remote Sensing（TGRS）录用',
-  },
-  {
-    date: '2023-04-28',
-    type: 'award',
-    event:
-      '团队学生在第十四届“蓝桥杯”全国软件和信息技术专业人才大赛全国总决赛中荣获一等奖1项、二等奖3项',
-  },
-  {
-    date: '2023-06-01',
-    type: 'career',
-    event: [
+      '(1) The Huawei-certified HCIA-Big Data V3.5 course "Big Data Technology and Applications" (course code: EBGTD9053), co-developed by our group and Huawei, is now live — anyone interested in our engineering fundamentals can self-study it; (2) The "Comprehensive Practice Guide for Big Data System Development 2.0" was released, supporting hands-on practice across batch, query analysis, stream and graph computing systems; (3) Our academic monograph "Distributed Machine Learning — Applications of the Alternating Direction Method of Multipliers in Machine Learning" is now on sale at JD.com and Dangdang.',
+    links: [
       {
-        id: 'zhaoyuan',
-        name: '赵予安',
-        grade: 2020,
-        signed: '华为技术有限公司（成都研究所）',
-        intents: ['中兴通讯股份有限公司'],
-        position: '软件开发工程师',
-        honors: ['一等学业奖学金（2021）', '国家奖学金（2022）'],
+        label: 'HCIA-Big Data course',
+        url: 'https://ilearningx.huawei.com/portal/courses/HuaweiX+EBGTD9053/about/?redirectFromPC=true',
       },
       {
-        id: 'wenzhiruo',
-        name: '温芷若',
-        grade: 2020,
-        signed: '杭州海康威视数字技术股份有限公司',
-        intents: ['浙江大华技术股份有限公司'],
-        position: '算法工程师',
-        honors: ['二等学业奖学金（2021）', '二等学业奖学金（2022）'],
+        label: 'Practice guide download (code: h6sp)',
+        url: 'https://pan.baidu.com/s/1i1jT_5oHmFVz5bKaHp852w',
+      },
+      {
+        label: 'Monograph · JD.com',
+        url: 'https://item.jd.com/12872097.html',
+      },
+      {
+        label: 'Monograph · Dangdang',
+        url: 'http://product.dangdang.com/29260759.html',
       },
     ],
   },
   {
-    date: '2023-06-30',
+    date: '2023-04-02',
     type: 'paper',
     event:
-      '2020级硕士研究生叶之秋硕士毕业论文“基于注意力机制的多源遥感图像融合方法研究”被答辩组推荐为校级优秀硕士毕业论文',
+      'Congratulations to master\u2019s student Tan Jiayang whose paper "A spatiotemporal fusion method based on interpretable deep networks" was accepted by Applied Intelligence, a CCF-C / CAS-2 journal.',
   },
   {
-    date: '2023-09-22',
-    type: 'report',
+    date: '2023-05-06',
+    type: 'paper',
     event:
-      '雷大江教授在中国图象图形学学会遥感图像专业委员会2023学术年会上作题为《深度展开网络在遥感图像融合中的应用》的特邀报告',
+      'Congratulations to master\u2019s student Li Xingxing whose paper "Pansharpening Method Based on Deep Non-local Unfolding" was accepted by IEEE Transactions on Geoscience and Remote Sensing, a CCF-B / CAS-1-Top journal.',
   },
   {
-    date: '2023-10-20',
+    date: '2023-06-13',
+    type: 'career',
+    event: [
+      {
+        id: '周翔辉',
+        name: '周翔辉',
+        grade: 2020,
+        signed: 'United Imaging',
+        intents: ['Wondershare', 'YOTEC Power Technology'],
+        position: 'Web Frontend Engineer',
+        honors: [],
+      },
+      {
+        id: '陈鹏',
+        name: '陈鹏',
+        grade: 2020,
+        signed: 'Ctrip Business Travel',
+        intents: ['TD Tech'],
+        position: 'Java Backend Engineer',
+        honors: ['National Scholarship'],
+      },
+      {
+        id: '罗鑫',
+        name: '罗鑫',
+        grade: 2020,
+        signed: 'Kuaishou (Beijing)',
+        intents: ['Shenzhen Xinkailei Technology Co., Ltd.', 'TAL Education', 'H3C'],
+        position: 'Java Backend Engineer',
+        honors: ['First-Class Academic Scholarship', 'Outstanding Student Cadre'],
+      },
+      {
+        id: '黄志强',
+        name: '黄志强',
+        grade: 2020,
+        signed: 'Nanchang Municipal Public Security Bureau',
+        intents: ['Ctrip Platform', 'BYD', 'Tongcheng Travel', 'CETC 10th Research Institute'],
+        position: 'Police Technology Officer',
+        honors: ['First-Class Academic Scholarship'],
+      },
+      {
+        id: '刘文杰',
+        name: '刘文杰',
+        grade: 2020,
+        signed: 'China Mobile Suzhou Research Institute',
+        intents: ['ThoughtWorks'],
+        position: 'Java Backend Engineer',
+        honors: ['Third-Class Academic Scholarship'],
+      },
+      {
+        id: '黄金',
+        name: '黄金',
+        grade: 2020,
+        signed: 'OPPO (Chengdu)',
+        intents: [],
+        position: 'Test Development Engineer',
+        honors: ['First-Class Academic Scholarship', 'Outstanding Student Cadre'],
+      },
+      {
+        id: '卢文糠',
+        name: '卢文糠',
+        grade: 2020,
+        signed: 'Changan Automobile Software Technology Co.',
+        intents: ['Longfor Digital Technology'],
+        position: 'Algorithm Engineer',
+        honors: ['Third-Class Academic Scholarship'],
+      },
+    ],
+  },
+  {
+    date: '2023-06-14',
     type: 'award',
-    event: '团队2021级硕士研究生蔡明峻荣获2023年硕士研究生国家奖学金',
+    event:
+      'Congratulations to 2020-class graduate student Chen Peng on receiving the 2022 university-level Outstanding Master\u2019s Thesis award (thesis: "A Remote Sensing Image Spatial-Spectral Fusion Method Based on Multi-scale Feature Enhancement").',
   },
   {
-    date: '2023-12-15',
-    type: 'course',
+    date: '2023-09-15',
+    type: 'paper',
     event:
-      '雷大江教授领衔建设的《大数据技术与应用》研究生课程入选重庆邮电大学研究生课程思政示范课程',
+      'Congratulations to 2021-class master\u2019s student Li Tong whose paper "A novel time-delay neural grey model and its applications" was accepted by Expert Systems With Applications, a CCF-C / CAS-1-Top journal.',
+  },
+  {
+    date: '2023-10-24',
+    type: 'award',
+    event: 'Congratulations to 2021-class master\u2019s students Li Tong and Li Xingxing on receiving the National Scholarship.',
+  },
+  {
+    date: '2023-12-28',
+    type: 'award',
+    event:
+      'Congratulations to 2021-class master\u2019s student Zhang Tao, whose paper "Autism spectrum disorder diagnosis based on deep unrolling-based spatial constraint representation" won the 2023 Editor\u2019s Choice Award.',
   },
 ]

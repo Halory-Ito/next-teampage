@@ -6,7 +6,8 @@
       "home": "主页",
       "news": "新闻",
       "team": "团队",
-      "daily": "日常"
+      "daily": "日常",
+      "join": "加入我们"
     }
   },
   "Home": {
@@ -29,7 +30,7 @@
     "Stats": {
       "eyebrow": "数据一览",
       "title": "数据展示",
-      "description": "在籍师生规模与历年动态成果一览，全部由团队成员档案与新闻数据自动统计。",
+      "description": "在籍师生规模与历年动态成果一览，全部由团队成员档案与新闻数据自动统计",
       "items": {
         "students": {
           "label": "学生数",
@@ -69,8 +70,34 @@
     "Testimonials": {
       "eyebrow": "成员之声",
       "title": "学生评价",
-      "description": "听团队成员与毕业校友分享他们在课题组的成长经历（当前为示例内容）。",
+      "description": "听团队成员与毕业校友分享他们在课题组的成长经历",
       "empty": "该板块暂无评价"
+    },
+    "News": {
+      "eyebrow": "团队动态",
+      "title": "最新动态",
+      "description": "课题组近期的论文、获奖、升学与就业等消息。",
+      "viewAll": "查看全部动态",
+      "pinned": "置顶",
+      "careerSummary": "{count} 名毕业生签约：{companies}",
+      "careerMore": " 等",
+      "types": {
+        "career": "就业",
+        "education": "升学",
+        "paper": "论文",
+        "award": "获奖",
+        "report": "报道",
+        "course": "课程",
+        "recruit": "招募",
+        "project": "项目"
+      }
+    },
+    "Cta": {
+      "badge": "招生与入组",
+      "title": "欢迎加入课题组",
+      "description": "如果你对大数据智能与遥感图像处理感兴趣，欢迎了解我们的招生信息、培养模式与加入流程。",
+      "recruitLine": "面向 {target} 招生",
+      "cta": "了解招生详情"
     }
   },
   "Daily": {
@@ -84,7 +111,33 @@
     "photoCount": "{count} 张照片"
   },
   "News": {
-    "empty": "该年份暂无动态"
+    "empty": "该年份暂无动态",
+    "position": "岗位",
+    "signed": "签约单位",
+    "intents": "意向单位",
+    "honors": "荣誉",
+    "careerTitle": "就业去向",
+    "name": "姓名",
+    "grade": "年级",
+    "gradeSuffix": "{grade}级",
+    "pinned": "置顶",
+    "listSeparator": "、"
+  },
+  "JoinUs": {
+    "eyebrow": "招生与入组",
+    "title": "加入我们",
+    "recruitLine": "面向 {target} 招生",
+    "aboutTitle": "关于课题组",
+    "researchTitle": "研究方向",
+    "trainingTitle": "培养模式",
+    "requirementsTitle": "招生要求",
+    "interviewTitle": "面试内容",
+    "algorithmTitle": "算法考核范围",
+    "bonusLabel": "加分项：",
+    "processTitle": "加入流程",
+    "contactTitle": "联系方式",
+    "copy": "复制",
+    "copied": "已复制"
   },
   "Team": {
     "Member": {
@@ -93,6 +146,7 @@
       "avatarAlt": "{name} 的头像",
       "homepage": "个人主页",
       "ongoing": "至今",
+      "empty": "暂无该条件下的成员",
       "role": {
         "teacher": "教师",
         "phd": "博士生",
@@ -133,6 +187,29 @@
         "patent": "专利",
         "software": "软件"
       }
+    }
+  },
+  "Metadata": {
+    "siteName": "雷大江团队",
+    "home": {
+      "title": "大数据智能与遥感图像处理课题组",
+      "description": "重庆邮电大学雷大江教授课题组，围绕大数据智能与遥感图像智能处理方向开展科研与工程实践并行的研究，成果发表于 IEEE TGRS、Information Fusion、Remote Sensing 等期刊。"
+    },
+    "news": {
+      "title": "最新动态",
+      "description": "课题组近期的论文、获奖、升学、就业与项目等最新动态。"
+    },
+    "team": {
+      "title": "团队成员",
+      "description": "了解课题组的教师、博士生、硕士生与本科生成员及其研究方向。"
+    },
+    "daily": {
+      "title": "日常",
+      "description": "课题组成员的日常记录、相册与生活点滴。"
+    },
+    "join": {
+      "title": "加入我们",
+      "description": "了解课题组的招生要求、培养模式、加入流程与联系方式。"
     }
   }
 }

@@ -2,45 +2,17 @@ import { Member } from '@/types/member'
 
 export const masters2023: Member[] = [
   {
-    avatarUrl: '/images/avatars/2023/shuyaofeng.png',
+    avatarUrl: '/images/avatars/2023/雷轩.png',
     grade: 2023,
-    id: 'shuyaofeng',
-    role: 'master',
-    introduction: '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为自然语言处理。',
-    name: '冯书瑶',
-    nameEn: 'ShuYao Feng',
-    research: '自然语言处理',
-    career: '长安汽车',
-    education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '昆明理工大学',
-      },
-      {
-        startDate: '2023-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2023/yuxuanhan.png',
-    grade: 2023,
-    id: 'yuxuanhan',
+    id: '雷轩',
     role: 'master',
     introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为计算机视觉与图像理解。',
-    name: '韩宇轩',
-    nameEn: 'YuXuan Han',
-    research: '计算机视觉与图像理解',
-    career: '华为',
+      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，研究方向为后端开发与大数据平台；攻读期间获三等学业奖学金（2024、2025）；毕业后入职杭州华为云计算技术有限公司，担任软件开发工程师。',
+    name: '雷轩',
+    nameEn: 'Xuan Lei',
+    research: '后端开发与大数据平台',
+    career: '华为云',
     education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '四川大学',
-      },
       {
         startDate: '2023-09',
         endDate: '2026-06',
@@ -49,45 +21,17 @@ export const masters2023: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2023/shijiexu.png',
+    avatarUrl: '/images/avatars/2023/陈洪金.png',
     grade: 2023,
-    id: 'shijiexu',
-    role: 'master',
-    introduction: '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为语音信号处理。',
-    name: '徐世杰',
-    nameEn: 'ShiJie Xu',
-    research: '语音信号处理',
-    career: '蚂蚁集团',
-    education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '南京邮电大学',
-      },
-      {
-        startDate: '2023-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2023/wantingwang.png',
-    grade: 2023,
-    id: 'wantingwang',
+    id: '陈洪金',
     role: 'master',
     introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为强化学习与智能决策。',
-    name: '王婉婷',
-    nameEn: 'WanTing Wang',
-    research: '强化学习与智能决策',
-    career: '中国移动',
+      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，研究方向为嵌入式与底层软件开发；攻读期间获三等学业奖学金（2024、2025）；毕业后入职海思技术有限公司，担任软件开发工程师。',
+    name: '陈洪金',
+    nameEn: 'HongJin Chen',
+    research: '嵌入式与底层软件开发',
+    career: '海思',
     education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '南京邮电大学',
-      },
       {
         startDate: '2023-09',
         endDate: '2026-06',
@@ -96,47 +40,18 @@ export const masters2023: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2023/shijieliu.png',
+    avatarUrl: '/images/avatars/2023/张凯.png',
     grade: 2023,
-    id: 'shijieliu',
+    id: '张凯',
     role: 'master',
     introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为联邦学习与隐私计算。',
-    name: '刘世杰',
-    nameEn: 'ShiJie Liu',
-    research: '联邦学习与隐私计算',
-    career: '海康威视',
-    education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '中山大学',
-      },
-      {
-        startDate: '2023-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2023/yutongwu.png',
-    grade: 2023,
-    id: 'yutongwu',
-    role: 'master',
-    introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为多模态学习与检索。',
-    name: '吴雨桐',
-    nameEn: 'YuTong Wu',
-    research: '多模态学习与检索',
+      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，研究方向为遥感图像全色锐化。论文"Nonlocal DeepUnfolding Pansharpening Method Based on Dynamic Kernel Prior"发表于IEEE Transactions on Geoscience and Remote Sensing，硕士毕业论文"基于动态核先验的非局部深度展开全色锐化方法研究"被推荐为校级优秀硕士毕业论文；毕业后入职科大讯飞股份有限公司，担任Java开发工程师。',
+    name: '张凯',
+    nameEn: 'Kai Zhang',
+    research: '遥感图像全色锐化',
     career: '科大讯飞',
     education: [
       {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '西安电子科技大学',
-      },
-      {
         startDate: '2023-09',
         endDate: '2026-06',
         school: '重庆邮电大学',
@@ -144,22 +59,17 @@ export const masters2023: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2023/mengqihu.png',
+    avatarUrl: '/images/avatars/2023/何霁衡.png',
     grade: 2023,
-    id: 'mengqihu',
+    id: '何霁衡',
     role: 'master',
     introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为工业大数据时序分析。',
-    name: '胡梦琪',
-    nameEn: 'MengQi Hu',
-    research: '工业大数据时序分析',
-    career: '科大讯飞',
+      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，研究方向为软件开发与车载系统；攻读期间获二等学业奖学金（2025）；毕业后入职赛力斯汽车有限公司，担任软件开发工程师。',
+    name: '何霁衡',
+    nameEn: 'JiHeng He',
+    research: '软件开发与车载系统',
+    career: '赛力斯',
     education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '东南大学',
-      },
       {
         startDate: '2023-09',
         endDate: '2026-06',
@@ -168,69 +78,17 @@ export const masters2023: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2023/zimoxiao.png',
+    avatarUrl: '/images/avatars/2023/王云倩.png',
     grade: 2023,
-    id: 'zimoxiao',
-    role: 'master',
-    introduction: '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为大模型高效微调。',
-    name: '肖子墨',
-    nameEn: 'ZiMo Xiao',
-    research: '大模型高效微调',
-    career: '中国移动',
-    education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '华中科技大学',
-      },
-      {
-        startDate: '2023-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2023/yuanshanchen.png',
-    grade: 2023,
-    id: 'yuanshanchen',
+    id: '王云倩',
     role: 'master',
     introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为知识图谱与问答系统。',
-    name: '陈远山',
-    nameEn: 'YuanShan Chen',
-    research: '知识图谱与问答系统',
-    career: '阿里巴巴',
+      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，研究方向为中文医学关系抽取，论文发表于Applied Soft Computing；攻读期间获一等学业奖学金（2023）；毕业后入职彭州市人民政府街道机关，从事信息管理工作。',
+    name: '王云倩',
+    nameEn: 'YunQian Wang',
+    research: '中文医学关系抽取',
+    career: '彭州市人民政府',
     education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '武汉大学',
-      },
-      {
-        startDate: '2023-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2023/ruotongjiang.png',
-    grade: 2023,
-    id: 'ruotongjiang',
-    role: 'master',
-    introduction:
-      '重庆邮电大学2023级硕士研究生，导师为雷大江教授，主要研究方向为推荐系统与用户建模。',
-    name: '蒋若彤',
-    nameEn: 'RuoTong Jiang',
-    research: '推荐系统与用户建模',
-    career: '中国移动',
-    education: [
-      {
-        startDate: '2019-09',
-        endDate: '2023-06',
-        school: '东南大学',
-      },
       {
         startDate: '2023-09',
         endDate: '2026-06',

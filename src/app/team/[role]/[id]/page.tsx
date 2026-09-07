@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { allMembers, findMember } from '@/data/team'
-import type { Locale } from '@/i18n/config'
 import {
   MemberBiography,
   MemberEducation,
@@ -14,6 +13,7 @@ import {
   MemberResearch,
   MemberWorkHistory,
 } from '@/features/team'
+import type { Locale } from '@/i18n/config'
 
 type PageProps = {
   params: Promise<{ role: string; id: string }>
@@ -24,8 +24,10 @@ export function generateStaticParams() {
   return allMembers.map((member) => ({ role: member.role, id: member.id }))
 }
 
-// 所有合法路径都已在构建期枚举，未枚举的路径直接返回 404，无需服务端动态渲染
-export const dynamicParams = false
+// 注意：页面因读取 locale（cookie/accept-language）而必须动态渲染，
+// 因此不能使用 dynamicParams = false（否则构建期未预渲染的路径会全部 404）。
+// 非法 role + id 由 findMember() 返回 undefined 并触发 notFound() 兜底 404。
+export const dynamicParams = true
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { role, id } = await params

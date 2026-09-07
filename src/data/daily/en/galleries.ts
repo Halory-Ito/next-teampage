@@ -1,5 +1,3 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { DailyGallery } from '@/types/daily'
 import { memos } from './memo'
 import { plogs } from './plog'

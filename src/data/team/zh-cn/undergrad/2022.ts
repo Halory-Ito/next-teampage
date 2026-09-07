@@ -2,56 +2,25 @@ import { Member } from '@/types/member'
 
 export const undergrads2022: Member[] = [
   {
-    avatarUrl: '/images/avatars/2022/yuanshanpeng.png',
+    avatarUrl: '/images/avatars/2022/王俊民.png',
     grade: 2022,
-    id: 'yuanshanpeng',
+    id: '王俊民',
     role: 'undergrad',
-    introduction: '重庆邮电大学2022级本科生，研究方向为多模态学习与检索。',
-    name: '彭远山',
-    nameEn: 'YuanShan Peng',
-    research: '多模态学习与检索',
-    career: '米哈游',
+    introduction:
+      '重庆邮电大学计算机科学文峰实验班2022级本科生。论文"MedMamba: Multi-Scale Deformable Attention via State Space Models for Robust Medical Image Segmentation"发表于Biomedical Signal Processing & Control；2025年获得推免资格，被天津大学未来技术学院免初试录取为电子信息专业学位硕士。',
+    name: '王俊民',
+    nameEn: 'JunMin Wang',
+    research: '医学图像分割与状态空间模型',
+    career: '天津大学',
     education: [
       {
         startDate: '2022-09',
         endDate: '2026-06',
         school: '重庆邮电大学',
       },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2022/zimodu.png',
-    grade: 2022,
-    id: 'zimodu',
-    role: 'undergrad',
-    introduction: '重庆邮电大学2022级本科生，研究方向为工业大数据时序分析。',
-    name: '杜子墨',
-    nameEn: 'ZiMo Du',
-    research: '工业大数据时序分析',
-    career: '美团',
-    education: [
       {
-        startDate: '2022-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2022/zixuanwang.png',
-    grade: 2022,
-    id: 'zixuanwang',
-    role: 'undergrad',
-    introduction: '重庆邮电大学2022级本科生，研究方向为大模型高效微调。',
-    name: '王梓萱',
-    nameEn: 'ZiXuan Wang',
-    research: '大模型高效微调',
-    career: '蚂蚁集团',
-    education: [
-      {
-        startDate: '2022-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
+        startDate: '2026-09',
+        school: '天津大学',
       },
     ],
   },

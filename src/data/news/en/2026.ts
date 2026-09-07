@@ -1,43 +1,86 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { News } from '@/types/news'
 
 export const news2026: News[] = [
   {
-    date: '2026-06-02',
-    type: 'paper',
+    date: '2026-06-01',
+    type: 'recruit',
+    pinned: true,
     event:
-      '2023级硕士研究生张凯硕士毕业论文“基于动态核先验的非局部深度展开全色锐化方法研究”被答辩组推荐为校级优秀硕士毕业论文',
+      'The 2027 recruitment QQ group "173394663" is now open. The interview covers frontend/backend development programming skills plus algorithm implementation (choose one of C, C++, Java); preference is given to applicants with frontend/backend project portfolios. The algorithm part covers core data structures, greedy, dynamic programming, divide and conquer, and backtracking. Interested students can join the group to learn about our needs before the interview, use the interview to identify gaps between their current skills and our requirements, study the gaps and take a second interview, and even lock an early offer by passing the interview.',
   },
   {
-    date: '2026-06-01',
+    date: '2026-06-08',
     type: 'career',
     event: [
       {
-        id: 'leixuan',
+        id: '雷轩',
         name: '雷轩',
         grade: 2023,
-        signed: '杭州华为云计算技术有限公司',
-        intents: ['海康威视', '中科紫东太初（北京）科技有限公司'],
-        position: '软件开发工程师',
-        honors: ['三等学业奖学金（2024）', '三等学业奖学金（2025）'],
+        signed: 'Hangzhou Huawei Cloud Computing Technology Co., Ltd.',
+        intents: ['Hikvision', 'Zhongke Zidong Taichu (Beijing) Technology Co., Ltd.'],
+        position: 'Software Development Engineer',
+        honors: ['Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2025)'],
       },
       {
-        id: 'chenhongjin',
+        id: '陈洪金',
         name: '陈洪金',
         grade: 2023,
-        signed: '海思技术有限公司',
-        intents: ['成都樟宜科技有限公司'],
-        position: '软件开发工程师',
-        honors: ['三等学业奖学金（2024）', '三等学业奖学金（2025）'],
+        signed: 'HiSilicon Technologies Co., Ltd.',
+        intents: ['Chengdu Zhangyi Technology Co., Ltd.'],
+        position: 'Software Development Engineer',
+        honors: ['Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2025)'],
+      },
+      {
+        id: '张凯',
+        name: '张凯',
+        grade: 2023,
+        signed: 'iFlytek Co., Ltd.',
+        intents: [],
+        position: 'Java Engineer',
+        honors: ['Special-Class Academic Scholarship (2025)', 'Second-Class Academic Scholarship (2024)', 'Second-Class Academic Scholarship (2023)'],
+      },
+      {
+        id: '何霁衡',
+        name: '何霁衡',
+        grade: 2023,
+        signed: 'Seres Automobile Co., Ltd.',
+        intents: ['China Mobile IoT'],
+        position: 'Software Development Engineer',
+        honors: ['Second-Class Academic Scholarship (2025)', 'Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2023)'],
+      },
+      {
+        id: '王云倩',
+        name: '王云倩',
+        grade: 2023,
+        signed: 'Pengzhou Municipal People\u2019s Government street office',
+        intents: [],
+        position: 'Information Management',
+        honors: ['Third-Class Academic Scholarship (2025)', 'Second-Class Academic Scholarship (2024)', 'First-Class Academic Scholarship (2023)'],
       },
     ],
   },
   {
     date: '2026-06-01',
-    type: 'recruit',
+    type: 'paper',
     event:
-      '项目组2027级研究生招生咨询QQ群“173394663”已经开放，项目组面试内容为前后端开发编程技能+算法实现能力（C、C++、Java任选一种实现），前后端开发有项目作品者优先考虑，算法实现包括数据结构基础算法、贪心、动态规划、分治、回溯。有意向的同学可以先进群了解团队需求后再面试，也可以通过面试了解目前掌握技能与团队需求之间差距，针对性学习后二次面试，通过面试可提前锁定意向offer。',
-    pinned: true,
+      'Congratulations to 2023-class master\u2019s student Zhang Kai, whose master\u2019s thesis "Research on Non-local Deep Unfolding Pansharpening Based on Dynamic Kernel Prior" was recommended by the defense committee as a university-level Outstanding Master\u2019s Thesis.',
+  },
+  {
+    date: '2026-06-01',
+    type: 'paper',
+    event:
+      'Congratulations to 2023-class master\u2019s student Wang Yunqian whose paper "Dilated Convolution and Graph Attention for Joint Relation Extraction in Chinese Medical Text" was accepted by Applied Soft Computing, a CCF-B / CAS-2-Top journal.',
+  },
+  {
+    date: '2026-05-26',
+    type: 'award',
+    event:
+      'Congratulations to Wang Yiqi, a 2024 undergraduate of the Wenfeng class, whose entry "SpinalBalance — an AI Smart Screening Platform for Adolescent Scoliosis" won the first prize in the provincial round of the China Collegiate Computing Contest and advanced to the national finals.',
+  },
+  {
+    date: '2026-02-11',
+    type: 'paper',
+    event:
+      'Congratulations to 2023-class master\u2019s student Zhang Kai whose paper "Nonlocal DeepUnfolding Pansharpening Method Based on Dynamic Kernel Prior" was accepted by IEEE Transactions on Geoscience and Remote Sensing (TGRS), a CCF-B / CAS-1-Top journal.',
   },
 ]

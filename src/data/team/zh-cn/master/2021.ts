@@ -2,22 +2,17 @@ import { Member } from '@/types/member'
 
 export const masters2021: Member[] = [
   {
-    avatarUrl: '/images/avatars/2021/junjieshen.png',
+    avatarUrl: '/images/avatars/2021/李彤.png',
     grade: 2021,
-    id: 'junjieshen',
+    id: '李彤',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为分布式机器学习系统。',
-    name: '沈俊杰',
-    nameEn: 'JunJie Shen',
-    research: '分布式机器学习系统',
-    career: '腾讯',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授。攻读期间获国家奖学金（2023）、特等学业奖学金，论文发表于Expert Systems With Applications；毕业后入职川仪自动化股份有限公司，担任测试工程师。',
+    name: '李彤',
+    nameEn: 'Tong Li',
+    research: '灰色系统与时滞神经网络',
+    career: '川仪自动化',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '四川大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',
@@ -26,22 +21,17 @@ export const masters2021: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2021/ruotongzhou.png',
+    avatarUrl: '/images/avatars/2021/魏琪.png',
     grade: 2021,
-    id: 'ruotongzhou',
+    id: '魏琪',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为遥感图像智能解译。',
-    name: '周若彤',
-    nameEn: 'RuoTong Zhou',
-    research: '遥感图像智能解译',
-    career: '蚂蚁集团',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，研究方向为医学临床文本命名实体识别，论文发表于IEEE Journal of Biomedical and Health Informatics；毕业后入职广通服电信规划设计院，担任信息化咨询工程师。',
+    name: '魏琪',
+    nameEn: 'Qi Wei',
+    research: '医学临床文本命名实体识别',
+    career: '广通服电信规划设计院',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '东南大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',
@@ -50,45 +40,17 @@ export const masters2021: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2021/yutonghe.png',
+    avatarUrl: '/images/avatars/2021/王正.png',
     grade: 2021,
-    id: 'yutonghe',
-    role: 'master',
-    introduction: '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为自然语言处理。',
-    name: '何雨桐',
-    nameEn: 'YuTong He',
-    research: '自然语言处理',
-    career: '网易',
-    education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '山东大学',
-      },
-      {
-        startDate: '2021-09',
-        endDate: '2024-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2021/ruotongding.png',
-    grade: 2021,
-    id: 'ruotongding',
+    id: '王正',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为计算机视觉与图像理解。',
-    name: '丁若彤',
-    nameEn: 'RuoTong Ding',
-    research: '计算机视觉与图像理解',
-    career: '商汤科技',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，研究方向为中文命名实体识别，论文发表于Artificial Intelligence Review；毕业后入职云和恩墨，担任Golang开发工程师。',
+    name: '王正',
+    nameEn: 'Zheng Wang',
+    research: '中文命名实体识别',
+    career: '云和恩墨',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '昆明理工大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',
@@ -97,45 +59,17 @@ export const masters2021: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2021/wangshuxiao.png',
+    avatarUrl: '/images/avatars/2021/李星星.png',
     grade: 2021,
-    id: 'wangshuxiao',
-    role: 'master',
-    introduction: '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为语音信号处理。',
-    name: '肖望舒',
-    nameEn: 'WangShu Xiao',
-    research: '语音信号处理',
-    career: '网易',
-    education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '湖南大学',
-      },
-      {
-        startDate: '2021-09',
-        endDate: '2024-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2021/anningwu.png',
-    grade: 2021,
-    id: 'anningwu',
+    id: '李星星',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为强化学习与智能决策。',
-    name: '吴安宁',
-    nameEn: 'AnNing Wu',
-    research: '强化学习与智能决策',
-    career: '网易',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授。攻读期间获国家奖学金（2023），论文发表于IEEE Transactions on Geoscience and Remote Sensing；毕业后入职交通银行四川省分行，从事系统开发分析工作。',
+    name: '李星星',
+    nameEn: 'XingXing Li',
+    research: '遥感图像全色锐化',
+    career: '交通银行',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '中南大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',
@@ -144,22 +78,17 @@ export const masters2021: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2021/pengfeiren.png',
+    avatarUrl: '/images/avatars/2021/肖浪.png',
     grade: 2021,
-    id: 'pengfeiren',
+    id: '肖浪',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为联邦学习与隐私计算。',
-    name: '任鹏飞',
-    nameEn: 'PengFei Ren',
-    research: '联邦学习与隐私计算',
-    career: '海康威视',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，研究方向为大数据分析与解决方案设计；毕业后入职重庆联通，担任解决方案岗位工程师。',
+    name: '肖浪',
+    nameEn: 'Lang Xiao',
+    research: '大数据分析与解决方案',
+    career: '重庆联通',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '山东大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',
@@ -168,22 +97,17 @@ export const masters2021: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2021/muzhihan.png',
+    avatarUrl: '/images/avatars/2021/张涛.png',
     grade: 2021,
-    id: 'muzhihan',
+    id: '张涛',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为多模态学习与检索。',
-    name: '韩牧之',
-    nameEn: 'MuZhi Han',
-    research: '多模态学习与检索',
-    career: '比亚迪',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，研究方向为医学影像分析与深度展开网络，论文获2023年度编辑推荐奖；毕业后入职长安汽车软件科技公司，担任智能数据运营工程师。',
+    name: '张涛',
+    nameEn: 'Tao Zhang',
+    research: '医学影像分析与深度展开网络',
+    career: '长安汽车软件科技',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '武汉大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',
@@ -192,45 +116,17 @@ export const masters2021: Member[] = [
     ],
   },
   {
-    avatarUrl: '/images/avatars/2021/bowenmeng.png',
+    avatarUrl: '/images/avatars/2021/谭家羊.png',
     grade: 2021,
-    id: 'bowenmeng',
+    id: '谭家羊',
     role: 'master',
     introduction:
-      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为工业大数据时序分析。',
-    name: '孟博文',
-    nameEn: 'BoWen Meng',
-    research: '工业大数据时序分析',
-    career: '海康威视',
+      '重庆邮电大学2021级硕士研究生，导师为雷大江教授，研究方向为遥感时空融合，论文发表于Applied Intelligence；攻读期间获优秀研究生、自立自强先进个人称号；毕业后入职中冶赛迪信息技术有限公司，担任后端工程师。',
+    name: '谭家羊',
+    nameEn: 'JiaYang Tan',
+    research: '遥感时空融合',
+    career: '中冶赛迪信息',
     education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '南昌大学',
-      },
-      {
-        startDate: '2021-09',
-        endDate: '2024-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2021/ruoxilv.png',
-    grade: 2021,
-    id: 'ruoxilv',
-    role: 'master',
-    introduction: '重庆邮电大学2021级硕士研究生，导师为雷大江教授，主要研究方向为大模型高效微调。',
-    name: '吕若曦',
-    nameEn: 'RuoXi Lv',
-    research: '大模型高效微调',
-    career: '科大讯飞',
-    education: [
-      {
-        startDate: '2017-09',
-        endDate: '2021-06',
-        school: '南昌大学',
-      },
       {
         startDate: '2021-09',
         endDate: '2024-06',

@@ -35,11 +35,6 @@ export default async function HomeIntro() {
 
         <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,320px)] lg:items-center">
           <div className="flex flex-col items-start gap-5">
-            <Badge variant="outline" className="gap-1.5 px-3 py-1 text-xs font-medium">
-              <Sparkles aria-hidden="true" className="size-3.5" />
-              {t('badge')}
-            </Badge>
-
             <h1
               id="intro-title"
               className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl"

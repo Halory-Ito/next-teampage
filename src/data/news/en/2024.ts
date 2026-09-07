@@ -1,64 +1,126 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { News } from '@/types/news'
 
 export const news2024: News[] = [
   {
-    date: '2024-01-16',
-    type: 'paper',
+    date: '2024-01-28',
+    type: 'recruit',
     event:
-      '团队2022级硕士研究生沈卓然的论文“基于条件扩散模型的全色锐化方法研究”被Information Fusion录用',
+      'The 2024 recruitment QQ group "307196268" for prospective graduate students is now open. The interview covers frontend/backend development programming skills plus algorithm implementation (choose one of C, C++, Java); preference is given to applicants with frontend/backend project portfolios. The algorithm part covers core data structures, greedy, dynamic programming, divide and conquer, and backtracking.',
   },
   {
-    date: '2024-06-01',
+    date: '2024-05-03',
+    type: 'paper',
+    event:
+      'Congratulations to 2022-class master\u2019s student Zhu Qianwei whose paper "HPLTS-GAN: A High-Precision Remote Sensing Spatio-Temporal Fusion Method Based on Low Temporal Sensitivity" was accepted by IEEE Transactions on Geoscience and Remote Sensing, a CCF-B / CAS-1-Top journal.',
+  },
+  {
+    date: '2024-06-30',
     type: 'career',
     event: [
       {
-        id: 'luoyiming',
-        name: '罗一鸣',
+        id: '李彤',
+        name: '李彤',
         grade: 2021,
-        signed: '阿里巴巴（中国）有限公司',
-        intents: ['蚂蚁科技集团股份有限公司'],
-        position: '算法工程师',
-        honors: ['一等学业奖学金（2022）', '国家奖学金（2023）'],
+        signed: 'Chuanyi Automation Co., Ltd.',
+        intents: [],
+        position: 'Test Engineer',
+        honors: ['Special-Class Academic Scholarship (2024)', 'National Scholarship (2023)', 'Second-Class Academic Scholarship (2022)', 'Special-Class Academic Scholarship (2021)'],
       },
       {
-        id: 'jiangwanqing',
-        name: '江晚晴',
+        id: '魏琪',
+        name: '魏琪',
         grade: 2021,
-        signed: '中国移动通信集团重庆有限公司',
-        intents: ['中国电信股份有限公司重庆分公司'],
-        position: '大数据开发工程师',
-        honors: ['二等学业奖学金（2022）', '三等学业奖学金（2023）'],
+        signed: 'Guangzhou Telecom Design & Planning Institute',
+        intents: [],
+        position: 'IT Consulting Engineer',
+        honors: ['Third-Class Academic Scholarship (2022)', 'Third-Class Academic Scholarship (2021)'],
+      },
+      {
+        id: '王正',
+        name: '王正',
+        grade: 2021,
+        signed: 'Enmotech',
+        intents: [],
+        position: 'Golang Engineer',
+        honors: ['Third-Class Academic Scholarship (2022)', 'Special-Class Academic Scholarship (2021)'],
+      },
+      {
+        id: '李星星',
+        name: '李星星',
+        grade: 2021,
+        signed: 'Bank of Communications Sichuan Branch',
+        intents: [],
+        position: 'System Development & Analysis',
+        honors: ['National Scholarship (2023)', 'Second-Class Academic Scholarship (2022)', 'Second-Class Academic Scholarship (2021)'],
+      },
+      {
+        id: '肖浪',
+        name: '肖浪',
+        grade: 2021,
+        signed: 'China Unicom Chongqing',
+        intents: [],
+        position: 'Solutions Engineer',
+        honors: ['Third-Class Academic Scholarship (2024)', 'Third-Class Academic Scholarship (2022)', 'Third-Class Academic Scholarship (2021)'],
+      },
+      {
+        id: '张涛',
+        name: '张涛',
+        grade: 2021,
+        signed: 'Changan Automobile Software Technology Co.',
+        intents: [],
+        position: 'Intelligent Data Operations',
+        honors: ['Second-Class Academic Scholarship (2024)', 'Second-Class Academic Scholarship (2022)', 'Third-Class Academic Scholarship (2021)'],
+      },
+      {
+        id: '谭家羊',
+        name: '谭家羊',
+        grade: 2021,
+        signed: 'CISDI Information Technology Co., Ltd.',
+        intents: [],
+        position: 'Backend Engineer',
+        honors: ['Second-Class Academic Scholarship (2024)', 'Outstanding Graduate Student (2023)', 'Self-Reliance Advanced Individual (2023)', 'Second-Class Academic Scholarship (2021)'],
       },
     ],
   },
   {
-    date: '2024-06-28',
+    date: '2024-07-26',
     type: 'paper',
     event:
-      '2021级硕士研究生阮清越硕士毕业论文“面向遥感图像复原的自监督学习方法研究”被答辩组推荐为校级优秀硕士毕业论文',
+      'Congratulations to 2021-class master\u2019s student Wang Zheng whose paper "The Interactive Fusion of Characters and Lexical Information for Chinese Named Entity Recognition" was accepted by Artificial Intelligence Review, a CAS-2-Top journal.',
   },
   {
-    date: '2024-08-16',
-    type: 'award',
+    date: '2024-08-13',
+    type: 'paper',
     event:
-      '团队项目“云锐视——云端高分辨率遥感图像智能服务”荣获中国国际大学生创新大赛（2024）重庆赛区金奖并晋级国赛',
+      'Congratulations to 2022-class master\u2019s student Zhang Genyuan whose paper "Non-local Deep Unfolding Pansharpening Method Based on Degradation Kernel Estimation" was accepted by IEEE Transactions on Geoscience and Remote Sensing, a CCF-B / CAS-1-Top journal.',
   },
   {
-    date: '2024-10-25',
-    type: 'award',
-    event: '团队2022级硕士研究生沈卓然荣获2024年硕士研究生国家奖学金',
-  },
-  {
-    date: '2024-11-08',
-    type: 'report',
+    date: '2024-09-19',
+    type: 'education',
     event:
-      '雷大江教授应邀出席2024年重庆市大数据产业博览会，并在大数据智能化应用论坛作题为《多源遥感大数据智能融合》的主题报告',
+      'Congratulations to Li Yujia, a student in the 2021 Wenfeng experimental class mentored by our group, on passing the final assessment and earning the recommendation for graduate study.',
   },
   {
-    date: '2024-12-20',
-    type: 'course',
-    event: '团队编写的《大数据技术原理与应用》教材由重庆大学出版社正式出版',
+    date: '2024-09-29',
+    type: 'education',
+    event:
+      'Congratulations to Li Yujia on being admitted to Northeastern University and to Xiao Xiao on being admitted to Beijing Jiaotong University for graduate study without entrance exams!',
+  },
+  {
+    date: '2024-11-07',
+    type: 'award',
+    event: 'Congratulations to 2022-class master\u2019s students Zhang Genyuan and Zhu Qianwei on receiving the 2024 National Scholarship!',
+  },
+  {
+    date: '2024-11-18',
+    type: 'paper',
+    event:
+      'Congratulations to 2022-class master\u2019s student Luo Lian whose paper "PL-ALF: A Novel Point-Line Feature Autonomous Localization and Flight Framework Based on Multi-sensor Fusion and Optimization" was accepted by IEEE Transactions on Instrumentation and Measurement, a CAS-2-Top journal.',
+  },
+  {
+    date: '2024-11-23',
+    type: 'paper',
+    event:
+      'Congratulations to 2022-class master\u2019s student Zhang Yuqi whose paper "Multi-scale Dynamic Sparse Token Multi-Instance Learning for Pathology Image Classification" was accepted by IEEE Journal of Biomedical and Health Informatics, a CCF-C / CAS-2-Top journal.',
   },
 ]

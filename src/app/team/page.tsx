@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import OptionWheel from '@/components/OptionWheel'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -13,6 +13,9 @@ import type { Locale } from '@/i18n/config'
 type Role = 'teacher' | 'phd' | 'master' | 'undergrad'
 type GradeFilter = number | 'all'
 
+/** 角色 Tab 的取值顺序，与 Team.Member.role 翻译键一一对应 */
+const TEAM_ROLES: Role[] = ['teacher', 'phd', 'master', 'undergrad']
+
 // OptionWheel 在滚动/拖拽过程中会高频触发 onChange，
 // 这里对年级筛选做防抖：停止操作一段时间后才真正更新列表
 const GRADE_FILTER_DEBOUNCE_MS = 500
@@ -21,6 +24,9 @@ export default function TeamPage() {
   const [role, setRole] = useState<Role>('teacher')
   const [grade, setGrade] = useState<GradeFilter>('all')
   const gradeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Tabs / 空态文案走 next-intl，角色名复用 Team.Member.role 双语映射
+  const t = useTranslations('Team.Member')
 
   // 按当前语言取成员数据（useLocale() 为运行时语言，切换语言后自动更新）
   const locale = useLocale()
@@ -75,10 +81,11 @@ export default function TeamPage() {
 
   const roleTabs = (
     <>
-      <TabsTrigger value="teacher">Teacher</TabsTrigger>
-      <TabsTrigger value="phd">PhD</TabsTrigger>
-      <TabsTrigger value="master">Master</TabsTrigger>
-      <TabsTrigger value="undergrad">Undergrad</TabsTrigger>
+      {(TEAM_ROLES as Role[]).map((value) => (
+        <TabsTrigger key={value} value={value}>
+          {t(`role.${value}`)}
+        </TabsTrigger>
+      ))}
     </>
   )
 
@@ -114,7 +121,7 @@ export default function TeamPage() {
         ))}
         {data.length === 0 && (
           <div className="col-span-full py-16 text-center text-sm text-muted-foreground">
-            No members found.
+            {t('empty')}
           </div>
         )}
       </div>

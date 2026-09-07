@@ -29,6 +29,10 @@ export const navItems = [
     title: 'daily',
     href: '/daily',
   },
+  {
+    title: 'join',
+    href: '/join-us',
+  },
 ]
 
 const isActive = (pathname: string, href: string) =>

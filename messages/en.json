@@ -6,7 +6,8 @@
       "home": "Home",
       "news": "News",
       "team": "Team",
-      "daily": "Daily"
+      "daily": "Daily",
+      "join": "Join Us"
     }
   },
   "Home": {
@@ -71,6 +72,32 @@
       "title": "Student Testimonials",
       "description": "Hear how current members and alumni grew with our group (sample content).",
       "empty": "No testimonials yet."
+    },
+    "News": {
+      "eyebrow": "Team Updates",
+      "title": "Latest News",
+      "description": "Recent publications, awards, admissions and career updates from our group.",
+      "viewAll": "View All News",
+      "pinned": "Pinned",
+      "careerSummary": "{count} graduates signed with {companies}",
+      "careerMore": ", etc.",
+      "types": {
+        "career": "Career",
+        "education": "Further Study",
+        "paper": "Publication",
+        "award": "Award",
+        "report": "Media",
+        "course": "Course",
+        "recruit": "Recruiting",
+        "project": "Project"
+      }
+    },
+    "Cta": {
+      "badge": "Admissions",
+      "title": "Join Our Group",
+      "description": "If you are interested in big data intelligence and remote sensing image processing, check out our admissions info, training model and how to join.",
+      "recruitLine": "Now recruiting: {target}",
+      "cta": "View Admission Details"
     }
   },
   "Daily": {
@@ -84,7 +111,33 @@
     "photoCount": "{count, plural, one {1 photo} other {{count} photos}}"
   },
   "News": {
-    "empty": "No news for this year."
+    "empty": "No news for this year.",
+    "position": "Position",
+    "signed": "Signed With",
+    "intents": "Interested In",
+    "honors": "Honors",
+    "careerTitle": "Career Destinations",
+    "name": "Name",
+    "grade": "Grade",
+    "gradeSuffix": "Grade {grade}",
+    "pinned": "Pinned",
+    "listSeparator": ", "
+  },
+  "JoinUs": {
+    "eyebrow": "Recruiting",
+    "title": "Join Us",
+    "recruitLine": "Recruiting {target}",
+    "aboutTitle": "About the Group",
+    "researchTitle": "Research Areas",
+    "trainingTitle": "Training Model",
+    "requirementsTitle": "Admission Requirements",
+    "interviewTitle": "Interview Topics",
+    "algorithmTitle": "Algorithm Scope",
+    "bonusLabel": "Plus: ",
+    "processTitle": "How to Apply",
+    "contactTitle": "Contact Us",
+    "copy": "Copy",
+    "copied": "Copied"
   },
   "Team": {
     "Member": {
@@ -93,6 +146,7 @@
       "avatarAlt": "Avatar of {name}",
       "homepage": "Homepage",
       "ongoing": "Present",
+      "empty": "No members found for the current filter.",
       "role": {
         "teacher": "Teacher",
         "phd": "PhD",
@@ -133,6 +187,29 @@
         "patent": "Patent",
         "software": "Software"
       }
+    }
+  },
+  "Metadata": {
+    "siteName": "DJ Lei Team",
+    "home": {
+      "title": "Big Data Intelligence & Remote Sensing Image Processing Group",
+      "description": "The group led by Prof. DJ Lei at Chongqing University of Posts and Telecommunications works on big data intelligence and intelligent remote sensing image processing, with research published in IEEE TGRS, Information Fusion, Remote Sensing and more."
+    },
+    "news": {
+      "title": "News",
+      "description": "Recent publications, awards, admissions, careers and project updates from our group."
+    },
+    "team": {
+      "title": "Team",
+      "description": "Meet the faculty, PhD, master's and undergraduate members of our group and their research areas."
+    },
+    "daily": {
+      "title": "Daily",
+      "description": "Daily moments, albums and campus life of our group members."
+    },
+    "join": {
+      "title": "Join Us",
+      "description": "Learn about our admission requirements, training model, how to apply and contact info."
     }
   }
 }

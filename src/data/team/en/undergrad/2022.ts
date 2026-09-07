@@ -1,59 +1,26 @@
-// TODO(i18n): English placeholder — content mirrors zh-cn until translated
-
 import { Member } from '@/types/member'
 
 export const undergrads2022: Member[] = [
   {
-    avatarUrl: '/images/avatars/2022/yuanshanpeng.png',
+    avatarUrl: '/images/avatars/2022/王俊民.png',
     grade: 2022,
-    id: 'yuanshanpeng',
+    id: '王俊民',
     role: 'undergrad',
-    introduction: '重庆邮电大学2022级本科生，研究方向为多模态学习与检索。',
-    name: '彭远山',
-    nameEn: 'YuanShan Peng',
-    research: '多模态学习与检索',
-    career: '米哈游',
+    introduction:
+      'Undergraduate (class of 2022) of the Wenfeng experimental class in computer science at Chongqing University of Posts and Telecommunications. His paper "MedMamba: Multi-Scale Deformable Attention via State Space Models for Robust Medical Image Segmentation" was published in Biomedical Signal Processing & Control. In 2025 he earned the recommendation for graduate study and was admitted to the School of Future Technology, Tianjin University, for a professional master\u2019s degree in Electronic Information.',
+    name: '王俊民',
+    nameEn: 'JunMin Wang',
+    research: 'Medical image segmentation and state space models',
+    career: 'Tianjin University',
     education: [
       {
         startDate: '2022-09',
         endDate: '2026-06',
-        school: '重庆邮电大学',
+        school: 'Chongqing University of Posts and Telecommunications',
       },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2022/zimodu.png',
-    grade: 2022,
-    id: 'zimodu',
-    role: 'undergrad',
-    introduction: '重庆邮电大学2022级本科生，研究方向为工业大数据时序分析。',
-    name: '杜子墨',
-    nameEn: 'ZiMo Du',
-    research: '工业大数据时序分析',
-    career: '美团',
-    education: [
       {
-        startDate: '2022-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
-      },
-    ],
-  },
-  {
-    avatarUrl: '/images/avatars/2022/zixuanwang.png',
-    grade: 2022,
-    id: 'zixuanwang',
-    role: 'undergrad',
-    introduction: '重庆邮电大学2022级本科生，研究方向为大模型高效微调。',
-    name: '王梓萱',
-    nameEn: 'ZiXuan Wang',
-    research: '大模型高效微调',
-    career: '蚂蚁集团',
-    education: [
-      {
-        startDate: '2022-09',
-        endDate: '2026-06',
-        school: '重庆邮电大学',
+        startDate: '2026-09',
+        school: 'Tianjin University',
       },
     ],
   },
