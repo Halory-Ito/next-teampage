@@ -7,7 +7,7 @@ export const news2025: News[] = [
     event: [
       {
         id: '张根源',
-        name: '张根源',
+        name: 'GenYuan Zhang',
         grade: 2022,
         signed: 'Tencent Technology (Shenzhen) Co., Ltd.',
         intents: ['Sugon Data Technology Co., Ltd.'],
@@ -16,7 +16,7 @@ export const news2025: News[] = [
       },
       {
         id: '张鱼齐',
-        name: '张鱼齐',
+        name: 'YuQi Zhang',
         grade: 2022,
         signed: 'Huawei Technologies (Shanghai) Co., Ltd.',
         intents: ['MS Finance', 'Shenzhen ZXS', 'CMB Cloud', 'Chongqing Inspur', 'Sangfor'],
@@ -25,7 +25,7 @@ export const news2025: News[] = [
       },
       {
         id: '朱倩微',
-        name: '朱倩微',
+        name: 'QianWei Zhu',
         grade: 2022,
         signed: 'Hangzhou Toutiao (ByteDance) Co., Ltd.',
         intents: ['Tencent', 'Xiaomi'],
@@ -34,7 +34,7 @@ export const news2025: News[] = [
       },
       {
         id: '李新洋',
-        name: '李新洋',
+        name: 'XinYang Li',
         grade: 2022,
         signed: 'Chongqing Changan Automobile Co., Ltd.',
         intents: ['Chongqing Bank', 'ICBC Chongqing Branch', 'China Unicom Chongqing', 'MS Finance', 'Megvii', 'Transsion', 'Chongqing Communication Service', 'Qingling Automobile'],
@@ -43,7 +43,7 @@ export const news2025: News[] = [
       },
       {
         id: '王青艳',
-        name: '王青艳',
+        name: 'QingYan Wang',
         grade: 2022,
         signed: 'Beijing MoboLink Technology Co., Ltd.',
         intents: ['Digital Manpower', 'China Mobile IoT', 'Mobvista'],
@@ -52,7 +52,7 @@ export const news2025: News[] = [
       },
       {
         id: '罗炼',
-        name: '罗炼',
+        name: 'Lian Luo',
         grade: 2022,
         signed: 'Chongqing Changan Automobile Co., Ltd.',
         intents: ['ZTE', 'Jialing Huaguang', 'China Mobile IoT'],

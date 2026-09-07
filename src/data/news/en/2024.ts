@@ -19,7 +19,7 @@ export const news2024: News[] = [
     event: [
       {
         id: '李彤',
-        name: '李彤',
+        name: 'Tong Li',
         grade: 2021,
         signed: 'Chuanyi Automation Co., Ltd.',
         intents: [],
@@ -28,7 +28,7 @@ export const news2024: News[] = [
       },
       {
         id: '魏琪',
-        name: '魏琪',
+        name: 'Qi Wei',
         grade: 2021,
         signed: 'Guangzhou Telecom Design & Planning Institute',
         intents: [],
@@ -37,7 +37,7 @@ export const news2024: News[] = [
       },
       {
         id: '王正',
-        name: '王正',
+        name: 'Zheng Wang',
         grade: 2021,
         signed: 'Enmotech',
         intents: [],
@@ -46,7 +46,7 @@ export const news2024: News[] = [
       },
       {
         id: '李星星',
-        name: '李星星',
+        name: 'XingXing Li',
         grade: 2021,
         signed: 'Bank of Communications Sichuan Branch',
         intents: [],
@@ -55,7 +55,7 @@ export const news2024: News[] = [
       },
       {
         id: '肖浪',
-        name: '肖浪',
+        name: 'Lang Xiao',
         grade: 2021,
         signed: 'China Unicom Chongqing',
         intents: [],
@@ -64,7 +64,7 @@ export const news2024: News[] = [
       },
       {
         id: '张涛',
-        name: '张涛',
+        name: 'Tao Zhang',
         grade: 2021,
         signed: 'Changan Automobile Software Technology Co.',
         intents: [],
@@ -73,7 +73,7 @@ export const news2024: News[] = [
       },
       {
         id: '谭家羊',
-        name: '谭家羊',
+        name: 'JiaYang Tan',
         grade: 2021,
         signed: 'CISDI Information Technology Co., Ltd.',
         intents: [],

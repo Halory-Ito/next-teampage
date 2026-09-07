@@ -3,28 +3,29 @@ import { Testimonial } from '@/types/testimonial'
 /**
  * Homepage · Student testimonials
  *
- * Sample placeholder data — replace with real interviews/surveys when available.
+ * Based on real group members (see src/data/team/en/master). Names, cohorts,
+ * placements and the facts in the quotes match the team records.
  */
 export const homeTestimonials: Testimonial[] = [
   {
-    id: 'chenli',
-    name: 'Chen Li',
-    role: '2018 Master · Big Data Development Engineer at Tencent',
+    id: 'chenhao',
+    name: 'Hao Chen',
+    role: '2019 Master · Algorithm Engineer at Baidu',
     quote:
-      'In two years with the group, I went from only knowing how to write course assignments to independently building and tuning modules of a big data platform. Our advisor walked us through code line by line, while also giving everyone ownership of the full pipeline in real projects — training that let me get up to speed quickly after joining the company.',
+      'During my master\u2019s, my paper was accepted by IEEE TGRS, I received the National Scholarship, and my thesis was rated an excellent university master\u2019s thesis. Our advisor guided us through every step of research while trusting us to own the full engineering pipeline. As an algorithm engineer at Baidu now, the rigorous habits and the ability to work independently that I built in the group still benefit me every day.',
   },
   {
-    id: 'caimingjun',
-    name: 'Cai Mingjun',
-    role: '2021 Master · National Scholarship / Paper published in IEEE TGRS',
+    id: 'huangyihang',
+    name: 'YiHang Huang',
+    role: '2019 Master · Web Frontend Engineer at Meituan',
     quote:
-      'From idea to experiments to a paper accepted by TGRS, our advisor polished every step with us, word by word. The group culture of sharing literature and peer-reviewing code is excellent — research here is not working in isolation, but a group of people thinking a problem through together.',
+      'My paper was accepted by IEEE TGRS and my thesis was rated an excellent university master\u2019s thesis. During job-hunting season, our advisor\u2019s advice and the experience shared by senior students helped me land an internship at Meituan and eventually a full-time position. The group taught me not only research methods but also hands-on engineering practice, so I could get up to speed quickly after joining.',
   },
   {
-    id: 'shenwangshu',
-    name: 'Shen Wangshu',
-    role: '2022 Master · Algorithm Engineer at Meituan',
+    id: 'zhanggenyuan',
+    name: 'GenYuan Zhang',
+    role: '2022 Master · Application Development Engineer at Tencent',
     quote:
-      'During job-hunting season, our advisor\u2019s recommendations and referrals from senior students helped me a lot. The group cultivates not only algorithmic ability but also engineering thinking and communication habits, which proved very useful in interviews and internships.',
+      'In my final year I received the National Scholarship, published my paper in IEEE TGRS, and my thesis was rated an excellent university master\u2019s thesis of 2025. From pansharpening research to engineering practice on big data platforms, the group\u2019s training was well-rounded. Now an application development engineer at Tencent in Shenzhen, I am deeply grateful to my advisor and teammates.',
   },
 ]

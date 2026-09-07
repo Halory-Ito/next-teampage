@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { News } from '@/types/news'
@@ -77,13 +77,18 @@ export default function EventCard({ date, event, type, pinned, links }: News) {
         <CardContent>
           <div className="mb-3 flex items-center justify-between">
             <div className="text-muted-foreground">{date}</div>
-            <div className="text-xs text-muted-foreground">{t('careerTitle')}</div>
+            {/*<div className="text-xs text-muted-foreground">{t('careerTitle')}</div>*/}
           </div>
 
           {/* 移动端：每条记录一张小卡片 */}
           <ul className="grid gap-2.5 md:hidden">
             {event.map((person) => (
-              <CareerRow key={person.id} person={person} formatGrade={formatGrade} separator={separator} />
+              <CareerRow
+                key={person.id}
+                person={person}
+                formatGrade={formatGrade}
+                separator={separator}
+              />
             ))}
           </ul>
 
@@ -113,7 +118,9 @@ export default function EventCard({ date, event, type, pinned, links }: News) {
                     <td className="py-2.5 pr-4 text-muted-foreground">
                       {person.intents.join(separator)}
                     </td>
-                    <td className="py-2.5 text-muted-foreground">{person.honors.join(separator)}</td>
+                    <td className="py-2.5 text-muted-foreground">
+                      {person.honors.join(separator)}
+                    </td>
                   </tr>
                 ))}
               </tbody>

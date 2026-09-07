@@ -43,7 +43,7 @@ export const news2023: News[] = [
     event: [
       {
         id: '周翔辉',
-        name: '周翔辉',
+        name: 'XiangHui Zhou',
         grade: 2020,
         signed: 'United Imaging',
         intents: ['Wondershare', 'YOTEC Power Technology'],
@@ -52,7 +52,7 @@ export const news2023: News[] = [
       },
       {
         id: '陈鹏',
-        name: '陈鹏',
+        name: 'Peng Chen',
         grade: 2020,
         signed: 'Ctrip Business Travel',
         intents: ['TD Tech'],
@@ -61,7 +61,7 @@ export const news2023: News[] = [
       },
       {
         id: '罗鑫',
-        name: '罗鑫',
+        name: 'Xin Luo',
         grade: 2020,
         signed: 'Kuaishou (Beijing)',
         intents: ['Shenzhen Xinkailei Technology Co., Ltd.', 'TAL Education', 'H3C'],
@@ -70,7 +70,7 @@ export const news2023: News[] = [
       },
       {
         id: '黄志强',
-        name: '黄志强',
+        name: 'ZhiQiang Huang',
         grade: 2020,
         signed: 'Nanchang Municipal Public Security Bureau',
         intents: ['Ctrip Platform', 'BYD', 'Tongcheng Travel', 'CETC 10th Research Institute'],
@@ -79,7 +79,7 @@ export const news2023: News[] = [
       },
       {
         id: '刘文杰',
-        name: '刘文杰',
+        name: 'WenJie Liu',
         grade: 2020,
         signed: 'China Mobile Suzhou Research Institute',
         intents: ['ThoughtWorks'],
@@ -88,7 +88,7 @@ export const news2023: News[] = [
       },
       {
         id: '黄金',
-        name: '黄金',
+        name: 'Jin Huang',
         grade: 2020,
         signed: 'OPPO (Chengdu)',
         intents: [],
@@ -97,7 +97,7 @@ export const news2023: News[] = [
       },
       {
         id: '卢文糠',
-        name: '卢文糠',
+        name: 'WenKang Lu',
         grade: 2020,
         signed: 'Changan Automobile Software Technology Co.',
         intents: ['Longfor Digital Technology'],

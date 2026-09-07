@@ -14,7 +14,7 @@ export const news2026: News[] = [
     event: [
       {
         id: '雷轩',
-        name: '雷轩',
+        name: 'Xuan Lei',
         grade: 2023,
         signed: 'Hangzhou Huawei Cloud Computing Technology Co., Ltd.',
         intents: ['Hikvision', 'Zhongke Zidong Taichu (Beijing) Technology Co., Ltd.'],
@@ -23,7 +23,7 @@ export const news2026: News[] = [
       },
       {
         id: '陈洪金',
-        name: '陈洪金',
+        name: 'HongJin Chen',
         grade: 2023,
         signed: 'HiSilicon Technologies Co., Ltd.',
         intents: ['Chengdu Zhangyi Technology Co., Ltd.'],
@@ -32,7 +32,7 @@ export const news2026: News[] = [
       },
       {
         id: '张凯',
-        name: '张凯',
+        name: 'Kai Zhang',
         grade: 2023,
         signed: 'iFlytek Co., Ltd.',
         intents: [],
@@ -41,7 +41,7 @@ export const news2026: News[] = [
       },
       {
         id: '何霁衡',
-        name: '何霁衡',
+        name: 'JiHeng He',
         grade: 2023,
         signed: 'Seres Automobile Co., Ltd.',
         intents: ['China Mobile IoT'],
@@ -50,7 +50,7 @@ export const news2026: News[] = [
       },
       {
         id: '王云倩',
-        name: '王云倩',
+        name: 'YunQian Wang',
         grade: 2023,
         signed: 'Pengzhou Municipal People\u2019s Government street office',
         intents: [],

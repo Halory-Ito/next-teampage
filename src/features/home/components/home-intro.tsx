@@ -22,6 +22,8 @@ export default async function HomeIntro() {
   const leader = getTeamByRole(locale).teacher[0]
   if (!leader) return null
 
+  // 按当前 locale 只展示一种语言的姓名（zh-cn → 中文名，en → 英文名）
+  const leaderName = locale === 'zh-cn' ? leader.name : leader.nameEn
   const highlights = t.raw('highlights') as string[]
 
   return (
@@ -45,7 +47,7 @@ export default async function HomeIntro() {
             <div className="flex flex-col gap-3 text-sm leading-7 text-muted-foreground sm:text-[15px]">
               {PARAGRAPH_KEYS.map((key) => (
                 <p key={key}>
-                  {t(`paragraphs.${key}`, { name: leader.name, career: leader.career ?? '' })}
+                  {t(`paragraphs.${key}`, { name: leaderName, career: leader.career ?? '' })}
                 </p>
               ))}
             </div>
@@ -82,18 +84,15 @@ export default async function HomeIntro() {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-muted ring-1 ring-foreground/10">
               <Image
                 src={leader.avatarUrl}
-                alt={leader.name}
+                alt={leaderName}
                 fill
                 sizes="(max-width: 1024px) 50vw, 300px"
                 className="object-cover object-top transition-transform duration-500 hover:scale-105"
               />
             </div>
             <div className="relative z-10 mx-4 -mt-10 rounded-2xl bg-card/90 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
-              <p className="font-heading text-lg font-semibold tracking-tight">
-                {leader.name}
-                <span className="ml-2 text-sm font-normal text-muted-foreground">
-                  {leader.nameEn}
-                </span>
+              <p className="font-heading text-center text-lg font-semibold tracking-tight">
+                {leaderName}
               </p>
               <div className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <Badge variant="secondary" className="font-normal">

@@ -91,7 +91,7 @@ export const news2021: News[] = [
     event: [
       {
         id: '陈浩',
-        name: '陈浩',
+        name: 'Hao Chen',
         grade: 2019,
         signed: 'Baidu Online Network Technology (Beijing) Co., Ltd.',
         intents: [],
@@ -100,7 +100,7 @@ export const news2021: News[] = [
       },
       {
         id: '黄杰',
-        name: '黄杰',
+        name: 'Jie Huang',
         grade: 2019,
         signed: 'Ctrip Computer Technology (Shanghai) Co., Ltd.',
         intents: [],
@@ -109,7 +109,7 @@ export const news2021: News[] = [
       },
       {
         id: '黄义航',
-        name: '黄义航',
+        name: 'YiHang Huang',
         grade: 2019,
         signed: 'Meituan (Beijing Sankuai Online Technology Co., Ltd.)',
         intents: [],
@@ -118,7 +118,7 @@ export const news2021: News[] = [
       },
       {
         id: '吴开力',
-        name: '吴开力',
+        name: 'KaiLi Wu',
         grade: 2019,
         signed: 'Shanghai Envision Innovation Technology Co., Ltd.',
         intents: [],
@@ -127,7 +127,7 @@ export const news2021: News[] = [
       },
       {
         id: '黄和峰',
-        name: '黄和峰',
+        name: 'HeFeng Huang',
         grade: 2019,
         signed: 'Tencent Technology (Shenzhen) Co., Ltd.',
         intents: [],
@@ -136,7 +136,7 @@ export const news2021: News[] = [
       },
       {
         id: '冉港生',
-        name: '冉港生',
+        name: 'GangSheng Ran',
         grade: 2019,
         signed: 'East Money (Chengdu) Co., Ltd.',
         intents: [],
@@ -145,7 +145,7 @@ export const news2021: News[] = [
       },
       {
         id: '白梦浩',
-        name: '白梦浩',
+        name: 'MengHao Bai',
         grade: 2019,
         signed: 'WeBank (Shenzhen Qianhai WeBank)',
         intents: [],
@@ -154,7 +154,7 @@ export const news2021: News[] = [
       },
       {
         id: '邹仁峰',
-        name: '邹仁峰',
+        name: 'RenFeng Zou',
         grade: 2019,
         signed: 'PLA Strategic Support Force unit',
         intents: [],

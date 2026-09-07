@@ -15,7 +15,9 @@ type LinkItem = {
 }
 
 type Career = {
+  /** 成员唯一标识（中文名），跨语言一致，用作 /team/master/[id] 的 URL */
   id: string
+  /** 展示用姓名，按语言本地化：zh-cn 用中文名，en 用拼音（对应团队数据的 nameEn） */
   name: string
   grade: number
   signed: string

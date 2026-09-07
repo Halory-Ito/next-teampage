@@ -149,11 +149,13 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
       className={`relative w-full h-full grid grid-cols-1 sm:grid-cols-2 content-start gap-3 max-w-sm mx-auto sm:max-w-none ${className}`}
-      style={{
-        '--r': `${radius}px`,
-        '--x': '50%',
-        '--y': '50%',
-      } as React.CSSProperties}
+      style={
+        {
+          '--r': `${radius}px`,
+          '--x': '50%',
+          '--y': '50%',
+        } as React.CSSProperties
+      }
     >
       {data.map((c, i) => {
         const isExternal = /^https?:\/\//.test(c.url || '')
@@ -167,17 +169,29 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
                 className="h-full w-full object-cover"
               />
             </div>
-            <footer className="relative z-10 grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 p-3 font-sans text-foreground">
-              <h3 className="m-0 text-[1.05rem] font-semibold">{c.title}</h3>
-              {c.handle && (
-                <span className="text-right text-[0.95rem] text-muted-foreground">{c.handle}</span>
-              )}
-              <p className="m-0 text-[0.85rem] text-muted-foreground">{c.subtitle}</p>
-              {c.location && (
-                <span className="text-right text-[0.85rem] text-muted-foreground">
-                  {c.location}
-                </span>
-              )}
+            <footer className="relative z-10 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 p-3 font-sans text-foreground">
+              {/* 左列：标题 + 副标题（纵向堆叠，长文本截断，避免挤压右侧元信息） */}
+              <div className="flex min-w-0 flex-col gap-y-1">
+                <h3 className="m-0 truncate text-[1.05rem] font-semibold">{c.title}</h3>
+                {/*{c.subtitle && (
+                  <p className="m-0 line-clamp-2 text-[0.85rem] leading-relaxed text-muted-foreground">
+                    {c.subtitle}
+                  </p>
+                )}*/}
+              </div>
+              {/* 右列：handle / location 元信息（右对齐，宽度受限后截断） */}
+              <div className="flex max-w-[45%] shrink-0 flex-col items-end gap-y-1">
+                {c.handle && (
+                  <span className="block w-full truncate text-right text-[0.95rem] text-muted-foreground">
+                    {c.handle}
+                  </span>
+                )}
+                {c.location && (
+                  <span className="block w-full truncate text-right text-[0.85rem] text-muted-foreground">
+                    {c.location}
+                  </span>
+                )}
+              </div>
             </footer>
           </>
         )
