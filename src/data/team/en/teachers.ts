@@ -14,7 +14,7 @@ export const teachers: Member[] = [
       'Research: big data and machine learning; Engineering: data platform planning and construction, performance tuning of big data components, big data algorithm design and implementation, big data project architecture design, NLP engineering applications',
     career: 'Professor',
     email: 'leidj@cqupt.edu.cn',
-    githubLink: 'https://github.com/Halory-Ito',
+    githubLink: 'https://github.com',
     homepage: 'http://faculty.cqupt.edu.cn/leidj/zh_CN/index.htm',
     orcid: '0000-0001-9293-8028',
     order: 1,

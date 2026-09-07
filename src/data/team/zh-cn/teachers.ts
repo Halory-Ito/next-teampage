@@ -14,7 +14,7 @@ export const teachers: Member[] = [
       '科研方向为大数据、机器学习；工程方向为数据平台规划与搭建、大数据组件性能调优、大数据算法设计与实施、大数据项目架构设计、自然语言处理工程应用',
     career: '教授',
     email: 'leidj@cqupt.edu.cn',
-    githubLink: 'https://github.com/Halory-Ito',
+    githubLink: 'https://github.com',
     homepage: 'http://faculty.cqupt.edu.cn/leidj/zh_CN/index.htm',
     orcid: '0000-0001-9293-8028',
     order: 1,
