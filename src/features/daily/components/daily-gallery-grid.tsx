@@ -2,9 +2,9 @@
 
 import { X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import Masonry, { type MasonryItem } from '@/components/Masonry'
 import MorphSlider from '@/components/MorphSlider'
 import { Button } from '@/components/ui/button'
 import type { DailyGallery } from '@/types/daily'
@@ -14,7 +14,8 @@ type DailyGalleryGridProps = {
 }
 
 /**
- * 相册卡片网格：点击某张卡片后，用全屏 MorphSlider 展示该相册内的全部图片。
+ * 相册瀑布流：用 Masonry 展示相册封面（悬停显示相册标题），
+ * 点击卡片后用全屏 MorphSlider 展示该相册内的全部图片。
  * MorphSlider 依赖 WebGL / gsap，仅在打开时挂载，关闭即销毁，避免常驻开销。
  */
 export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
@@ -67,50 +68,49 @@ export default function DailyGalleryGrid({ galleries }: DailyGalleryGridProps) {
     [active],
   )
 
+  // Masonry 的 items 引用需稳定，否则内部会在每次渲染重新预加载图片
+  const masonryItems = useMemo<MasonryItem[]>(
+    () =>
+      galleries.map((g, i) => ({
+        id: `${i}-${g.date}-${g.name}`,
+        img: g.cover,
+        title: g.name,
+        alt: g.description || g.name,
+      })),
+    [galleries],
+  )
+
+  // 点击卡片时按 id 反查相册，避免依赖数组下标
+  const galleryById = useMemo(
+    () => new Map(masonryItems.map((item, i) => [item.id, galleries[i]])),
+    [masonryItems, galleries],
+  )
+
   if (galleries.length === 0) {
-    return <p className="py-8 text-center text-sm text-muted-foreground">{t('emptyAlbums')}</p>
+    return (
+      <p className="rounded-lg border border-dashed border-border/60 py-16 text-center text-sm text-muted-foreground">
+        {t('emptyAlbums')}
+      </p>
+    )
   }
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 ">
-        {galleries.map((g) => (
-          <article
-            key={`${g.name}-${g.date}`}
-            role="button"
-            tabIndex={0}
-            aria-label={t('openAlbum', { name: g.name })}
-            onClick={() => open(g)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                open(g)
-              }
-            }}
-            className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10 outline-none transition-shadow hover:shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <div className="relative aspect-video w-full overflow-hidden">
-              <Image
-                src={g.cover}
-                alt={g.name}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex flex-col gap-1 p-4">
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-heading text-base font-medium">{g.name}</h2>
-                <span className="shrink-0 text-xs text-muted-foreground">{g.date}</span>
-              </div>
-              {g.description && <p className="text-sm text-muted-foreground">{g.description}</p>}
-              <p className="text-xs text-muted-foreground">
-                {t('photoCount', { count: g.gallery.length })}
-              </p>
-            </div>
-          </article>
-        ))}
-      </div>
+      <Masonry
+        items={masonryItems}
+        animateFrom="bottom"
+        scaleOnHover
+        hoverScale={0.98}
+        blurToFocus
+        radius={8}
+        shadow={false}
+        minColumnWidth={340}
+        maxColumns={4}
+        onItemClick={(item) => {
+          const gallery = galleryById.get(item.id)
+          if (gallery) open(gallery)
+        }}
+      />
 
       {active && (
         <div
